@@ -12,6 +12,6 @@ app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(cwd ,"client/index.html"));
 });
 
-server.listen(3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000");
 });
