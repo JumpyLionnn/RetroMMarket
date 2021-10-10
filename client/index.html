@@ -5,11 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://play.retro-mmo.com/res/images/badges/subscriber.png" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
     <title>RetroMMarket</title>
+
+    <script defer type="text/javascript" src="src/index.js"></script>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
+    <div id="main-browse-layout-space-div"></div>
+    <div id="main-browse-layout-div">
+        <h1 id="title">RetroMMarket</h1>
+        <div id="main-features-div">
+            <div id="item-browser">
+                <div id="menu-container">
+                    <div id="menu-search-bar">
+                        <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off">
+                        <button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button>
+                    </div>
+                    <button id="cart-button">Your cart</button>
+                </div>
+                <div id="items-list">
+                    <div id="item-card">
+                        <div id="item-preview-div">
+                            <img id="item-preview" src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
+                        </div>
+                        <div id="offer-details">
+                            <h2 id="item-name">The Tenderizer</h2>
+                            <h3 id="category-name">Weapons</h3>
+
+                            <div class="item-card-label" id="seller-label">
+                                <span>Seller: </span>
+                                <span id="seller-name">JumpyLion</span>
+                            </div>
+
+                            <div class="item-card-label" id="price-label">
+                                <span>price: </span>
+                                <span id="price-number">20,000g</span>
+                            </div>
+                            <div class="item-card-label" id="amount-label">
+                                <span>Amount: </span>
+                                <span id="amount-number">2</span>
+                            </div>
+                            <div class="item-card-label" id="description-label">
+                                <span>Sescription: </span>
+                                <div id="description-text">8 strength 0 intelegence 0 agility 0 defence 0 wisdom 0 luck <br/>Level 8 warrior</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="main-browse-sorting-layout-div"></div>
+    <div id="main-browse-layout-half-space-div"></div>
 </body>
 
 </html>

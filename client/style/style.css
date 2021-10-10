@@ -1,0 +1,179 @@
+@font-face {
+    font-family: RetroPixels;
+    src: url(https://play.retro-mmo.com/res/fonts/RetroPixels.ttf);
+}
+
+* {
+    font-family: RetroPixels;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+}
+
+
+/**
+main layout
+******************/
+
+#main-browse-layout-div {
+    flex-grow: 1;
+    border: 2px solid black;
+    display: flex;
+    flex-flow: column;
+}
+
+#main-browse-sorting-layout-div {
+    flex-grow: 1;
+    border: 2px solid black;
+}
+
+#main-browse-layout-space-div {
+    flex-grow: 2;
+}
+
+#main-browse-layout-half-space-div {
+    flex-grow: 1;
+}
+
+#title {
+    text-align: center;
+    font-size: 3em;
+    margin: .2em;
+}
+
+#main-features-div {
+    flex-grow: 1;
+}
+
+#item-browser {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+/**
+menu layout
+******************/
+
+#menu-container {
+    width: 100%;
+    height: fit-content;
+    padding: .5em 0;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+#menu-search-bar {
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    line-height: 2em;
+    font-size: 2em;
+    margin: 0 .2em 0 .5em;
+}
+
+#submit-search-button {
+    height: 2.2em;
+    width: 2.2em;
+    padding: 0;
+    background-color: transparent;
+}
+
+#submit-search-button img {
+    image-rendering: pixelated;
+    width: 100%;
+}
+
+#cart-button {
+    font-size: 2em;
+    margin-right: .5em;
+    margin-left: auto;
+}
+
+
+/*
+items
+*******/
+
+#items-list {
+    flex-grow: 5;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: .5em 0;
+}
+
+#item-card {
+    cursor: pointer;
+    width: calc(100% - 2em);
+    margin: .5em 1em;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#item-card:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+#item-preview-div {
+    position: relative;
+    width: 32%;
+    margin: .5em;
+}
+
+#item-preview-div:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+#item-preview {
+    image-rendering: pixelated;
+    position: absolute;
+    /* Take your picture out of the flow */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Make the picture taking the size of it's parent */
+    width: 100%;
+    /* This if for the object-fit */
+    height: 100%;
+    /* This if for the object-fit */
+    object-fit: cover;
+    /* Equivalent of the background-size: cover; of a background-image */
+    object-position: center;
+}
+
+.item-card-label {
+    font-size: 1.8em;
+}
+
+#item-name {
+    font-size: 2em;
+    margin: .3em 0 0 0;
+}
+
+#category-name {
+    font-size: 1.5em;
+    margin: .1em 0 .2em .5em;
+    color: gray;
+}

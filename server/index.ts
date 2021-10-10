@@ -8,8 +8,12 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 
+app.use("/style", express.static(path.join(cwd ,"client/style")));
+app.use("/assets", express.static(path.join(cwd ,"client/assets")));
+app.use("/src", express.static(path.join(cwd ,"client/build")));
+
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(cwd ,"client/index.html"));
+    res.sendFile(path.join(cwd ,"client/index.html"));
 });
 
 server.listen(process.env.PORT || 3000, () => {
