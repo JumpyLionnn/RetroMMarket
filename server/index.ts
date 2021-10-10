@@ -6,7 +6,6 @@ const cwd = process.cwd();
 
 const app = express();
 const http = require("http");
-
 const server = http.createServer(app);
 
 app.get("/", (req: Request, res: Response) => {
