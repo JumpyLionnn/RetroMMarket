@@ -17,9 +17,10 @@ const client = new pg.Client({
     connectionString: process.env.DATABASE_URL
 });
 client.connect();
-let connected: boolean = false;
+let connected: boolean | Error = false;
 client.on("connect", (error: Error, response: Response) => {
     if(error) {
+        connected = error;
         console.log(error);
         return;
     }
@@ -38,7 +39,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/status", (req: Request, res: Response) => {
-    res.send(connected ? "connected" : "not conneted");
+    res.send(connected.toString());
 });
 
 server.listen(process.env.PORT || 3000, () => {
