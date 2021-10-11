@@ -13,20 +13,23 @@ const server = http.createServer(app);
 
 // setting up the datacbase connection
 const pg = require('pg');
-const client = new pg.Client({
-    connectionString: process.env.DATABASE_URL
-});
+const databaseConnectionData: {[key:string]: any} = {connectionString: process.env.DATABASE_URL};
+if(process.env.NODE_ENV == "production"){
+    databaseConnectionData["ssl"] = { rejectUnauthorized: false };
+}
+const client = new pg.Client(databaseConnectionData);
 client.connect();
-let connected: boolean | Error = false;
+
+let connected: boolean = false;
 client.on("connect", (error: Error, response: Response) => {
     if(error) {
-        connected = error;
         console.log(error);
         return;
     }
     connected = true;
     console.log("Successfuly connected to postgres.");
 });
+
 
 
 // setting up the http routes
@@ -37,6 +40,7 @@ app.use("/src", express.static(path.join(cwd ,"client/build")));
 app.get("/", (req: Request, res: Response) => {
     res.sendFile(path.join(cwd ,"client/index.html"));
 });
+
 
 app.get("/status", (req: Request, res: Response) => {
     res.send(connected.toString());
