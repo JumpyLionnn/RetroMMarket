@@ -1,0 +1,26 @@
+#login-form {
+    width: 100%;
+}
+
+#login-form > * {
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+    margin-bottom: 0.5em;
+    padding: 0.25em;
+    font-size: 1.5em;
+}
+
+#login-form > button {
+    box-sizing: content-box;
+}
+
+#login-form > label {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+#main-features-div > a {
+    display: block;
+    text-align: center;
+}
