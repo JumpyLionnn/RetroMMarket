@@ -23,10 +23,12 @@
     "homepage": "https://github.com/JumpyLionnn/RetroMMarket#readme",
     "dependencies": {
         "express": "^4.17.1",
+        "pg": "^8.7.1",
         "socket-io": "^1.0.0"
     },
     "devDependencies": {
         "@types/node": "^16.10.3",
+        "dotenv": "^10.0.0",
         "nodemon": "^2.0.13",
         "typescript": "^4.4.3"
     }
