@@ -5,8 +5,5 @@ function addUserToDatabase(RetroMMOUsername: string, discordName: string, email:
         if(error){
             console.log(error);
         }
-        else{
-            console.log(response);
-        }
     });
 }

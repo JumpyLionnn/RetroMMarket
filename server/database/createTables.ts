@@ -10,5 +10,13 @@ function createTables(){
             password VARCHAR(1024),
             date bigint
         );
+
+        /* account creation invites
+        *******************************/
+        CREATE TABLE IF NOT EXISTS invitationTokens(
+            token VARCHAR(6) UNIQUE NOT NULL,
+            used BOOLEAN DEFAULT false,
+            userId INTEGER REFERENCES users(id)
+        );
     `);
 }
