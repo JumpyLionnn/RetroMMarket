@@ -1,45 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="style/authentication.css">
+{% endblock %}
+{% block script %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://play.retro-mmo.com/res/images/badges/subscriber.png" type="image/x-icon">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/authentication.css">
-
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
-
-    <title>RetroMMarket</title>
-</head>
-
-<body>
-    <div id="main-browse-layout-space-div"></div>
-    <div id="main-browse-layout-div">
-        <h1 id="title">RetroMMarket</h1>
-        <div id="main-features-div">
-            <form id="login-form" action="/register" method="post">
-                <label>RetroMMO Username:</label>
-                <input type="text" name="RetroMMOUsername" value="" placeholder="RetroMMO Username" required/>
-                <label>Email:</label>
-                <input type="text" name="email" value="" placeholder="email" required/>
-                <label>Password:</label>
-                <input type="password" name="password" value="" placeholder="passsword" required/>
-                <label>Discord (name#number)</label>
-                <input type="text" name="discordName" value="" placeholder="discord#0000" required />
-                <label>Invitation Code:</label>
-                <input type="text" name="invitationToken" value="" placeholder="Invitation Code" />
-                <span id="error-message">{{ errorMessage }}</span>
-                <button type="submit">Register</button>
-            </form>
-        </div>
-    </div>
-    <div id="main-browse-layout-space-div"></div>
-</body>
-
-</html>
+{% block content %}
+<form id="login-form" action="/register" method="post">
+    <label>RetroMMO Username:</label>
+    <input type="text" name="RetroMMOUsername" value="" placeholder="RetroMMO Username" required/>
+    <label>Email:</label>
+    <input type="text" name="email" value="" placeholder="email" required/>
+    <label>Password:</label>
+    <input type="password" name="password" value="" placeholder="passsword" required/>
+    <label>Discord (name#number)</label>
+    <input type="text" name="discordName" value="" placeholder="discord#0000" required />
+    <label>Invitation Code:</label>
+    <input type="text" name="invitationToken" value="" placeholder="Invitation Code" />
+    <span id="error-message">{{ errorMessage }}</span>
+    <button type="submit">Register</button>
+</form>
+{% endblock %} 
