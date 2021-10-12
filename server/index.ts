@@ -37,8 +37,23 @@ app.use("/style", express.static(path.join(cwd ,"client/style")));
 app.use("/assets", express.static(path.join(cwd ,"client/assets")));
 app.use("/src", express.static(path.join(cwd ,"client/build")));
 
-app.get("/", (req: Request, res: Response) => {
-    res.sendFile(path.join(cwd ,"client/index.html"));
+const nunjucks = require("nunjucks");
+nunjucks.configure("client", {
+    autoescape: true,
+    express: app
+});
+
+app.get("/", (req: any, res: any) => {
+    res.render("index.html");
+    //res.sendFile(path.join(cwd ,"client/index.html"));
+});
+
+app.get("/login", (req: any, res: any) => {
+    res.render("login.html");
+});
+
+app.get("/register", (req: any, res: any) => {
+    res.render("register.html");
 });
 
 

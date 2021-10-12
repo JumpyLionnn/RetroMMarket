@@ -23,6 +23,7 @@
     "homepage": "https://github.com/JumpyLionnn/RetroMMarket#readme",
     "dependencies": {
         "express": "^4.17.1",
+        "nunjucks": "^3.2.3",
         "pg": "^8.7.1",
         "socket-io": "^1.0.0"
     },
