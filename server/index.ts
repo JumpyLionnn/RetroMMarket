@@ -50,8 +50,8 @@ app.use("/assets", express.static(path.join(cwd ,"client/assets")));
 app.use("/src", express.static(path.join(cwd ,"client/build")));
 
 app.get("/", verifyAuth, homePageRoute);
-app.get("/register", (req: ExpressRequest, res: ExpressResponse) => registerPageRoute(req, res, {}));
-app.get("/login", (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
+app.get("/register", checkAuth, (req: ExpressRequest, res: ExpressResponse) => registerPageRoute(req, res, {}));
+app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
 
 
 app.post("/register", registerRoute);
