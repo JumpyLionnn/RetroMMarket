@@ -56,6 +56,7 @@ app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => logi
 
 app.post("/register", registerRoute);
 app.post("/login", loginRoute);
+app.post("/logout", logoutRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

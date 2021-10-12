@@ -51,6 +51,11 @@ main layout
     margin: .2em;
 }
 
+#logout-button {
+    font-size: 1.5em;
+    margin-left: .5em;
+}
+
 #main-features-div {
     flex-grow: 1;
 }

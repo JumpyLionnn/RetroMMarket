@@ -1,3 +1,3 @@
 function homePageRoute(req: ExpressRequest, res: ExpressResponse){
-    res.render("index.html", {});
+    res.render("index.html", {logoutNeeded: true});
 }

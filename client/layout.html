@@ -5,16 +5,19 @@
     <link rel="shortcut icon" href="https://play.retro-mmo.com/res/images/badges/subscriber.png" type="image/x-icon">
     <link rel="stylesheet" href="style/style.css">
     <title>RetroMMarket</title>
-    {% block css %}{% endblock %}
-    {% block script %}{% endblock %}
+    {% block css %}{% endblock %} {% block script %}{% endblock %}
 </head>
 
 <div id="main-browse-layout-space-div"></div>
 <div id="main-browse-layout-div">
     <h1 id="title">RetroMMarket</h1>
     <div id="main-features-div">
-        {% block content %}{% endblock %}
+        {% if logoutNeeded %}
+        <form action="/logout" , method="POST">
+            <input id="logout-button" type="submit" value="logout">
+        </form>
+        {% endif %} {% block content %}{% endblock %}
     </div>
 </div>
 <div id="main-browse-sorting-layout-div"></div>
-<div id="main-browse-layout-half-space-div"></div> 
+<div id="main-browse-layout-half-space-div"></div>
