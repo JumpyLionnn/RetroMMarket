@@ -32,17 +32,8 @@ main layout
     flex-flow: column;
 }
 
-#main-browse-sorting-layout-div {
-    flex-grow: 1;
-    border: 2px solid black;
-}
-
 #main-browse-layout-space-div {
     flex-grow: 2;
-}
-
-#main-browse-layout-half-space-div {
-    flex-grow: 1;
 }
 
 #title {
