@@ -1,7 +1,12 @@
 // importing libraries
 process.env.NODE_ENV != "production" ? require("dotenv").config() : null;
 const express = require("express");
+const bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 const path = require("path");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const nunjucks = require("nunjucks");
 
 // setting up variables
 const cwd = process.cwd();
@@ -10,6 +15,13 @@ const cwd = process.cwd();
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+nunjucks.configure(path.join(cwd ,"client"), {
+    autoescape: true,
+    express: app
+});
 
 // setting up the datacbase connection
 const pg = require('pg');
@@ -28,8 +40,8 @@ client.on("connect", (error: Error, response: Response) => {
     }
     connected = true;
     console.log("Successfuly connected to postgres.");
+    createTables();
 });
-
 
 
 // setting up the http routes
@@ -37,14 +49,13 @@ app.use("/style", express.static(path.join(cwd ,"client/style")));
 app.use("/assets", express.static(path.join(cwd ,"client/assets")));
 app.use("/src", express.static(path.join(cwd ,"client/build")));
 
-app.get("/", (req: Request, res: Response) => {
-    res.sendFile(path.join(cwd ,"client/index.html"));
-});
+app.get("/", verifyAuth, homePageRoute);
+app.get("/register", (req: ExpressRequest, res: ExpressResponse) => registerPageRoute(req, res, {}));
+app.get("/login", (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
 
 
-app.get("/status", (req: Request, res: Response) => {
-    res.send(connected.toString());
-});
+app.post("/register", registerRoute);
+app.post("/login", loginRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

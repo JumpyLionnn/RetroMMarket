@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-#login-form > * {
+#login-form>* {
     margin: 0 auto;
     display: block;
     width: 50%;
@@ -11,16 +11,20 @@
     font-size: 1.5em;
 }
 
-#login-form > button {
+#login-form>button {
     box-sizing: content-box;
 }
 
-#login-form > label {
+#login-form>label {
     margin-bottom: 0;
     padding-left: 0;
 }
 
-#main-features-div > a {
+#main-features-div>a {
     display: block;
     text-align: center;
+}
+
+#error-message {
+    color: red;
 }
