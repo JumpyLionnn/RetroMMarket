@@ -1,59 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://play.retro-mmo.com/res/images/badges/subscriber.png" type="image/x-icon">
-    <link rel="stylesheet" href="style/style.css">
-    <title>RetroMMarket</title>
-
-    <script defer type="text/javascript" src="src/index.js"></script>
-</head>
-
-<body>
-    <div id="main-browse-layout-space-div"></div>
-    <div id="main-browse-layout-div">
-        <h1 id="title">RetroMMarket</h1>
-        <div id="main-features-div">
-            <div id="item-browser">
-                <div id="menu-container">
-                    <div id="menu-search-bar">
-                        <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off">
-                        <button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button>
-                    </div>
-                    <button id="cart-button"><img src="assets/shoppingCart.png" alt="" height="32px">Cart</button>
-                    <div id="item-categories">
-                        <button>Armors</button>
-                        <button>Consumables</button>
-                        <button>Cosmetics</button>
-                        <button>Weapons</button>
-                    </div>
-                </div>
-                <div id="items-list">
-                    <div id="item-sort-menu">
-                        <span>Item</span>
-                        <span>Seller</span>
-                        <span>Category</span>
-                        <span>Price</span>
-                    </div>
-                    <div id="item-card">
-                        <div id="item-preview">
-                            <span id="item-name">The Tenderizer</span>
-                            <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
-                        </div>
-                        <span id="seller-name">JumpyLion</span>
-                        <span id="category-name">Weapons</span>
-                        <span id="price-number">20,000g</span>
-                    </div>
-                </div>
-            </div>
-
+{% extends "layout.html" %}
+{% block content %}
+<div id="item-browser">
+    <div id="menu-container">
+        <div id="menu-search-bar">
+            <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off">
+            <button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button>
+        </div>
+        <button id="cart-button"><img src="assets/shoppingCart.png" alt="" height="32px">Cart</button>
+        <div id="item-categories">
+            <button>Armors</button>
+            <button>Consumables</button>
+            <button>Cosmetics</button>
+            <button>Weapons</button>
         </div>
     </div>
-    <div id="main-browse-sorting-layout-div"></div>
-    <div id="main-browse-layout-half-space-div"></div>
-</body>
-
-</html>
+    <div id="items-list">
+        <div id="item-sort-menu">
+            <span>Item</span>
+            <span>Seller</span>
+            <span>Category</span>
+            <span>Price</span>
+        </div>
+        <div id="item-card">
+            <div id="item-preview">
+                <span id="item-name">The Tenderizer</span>
+                <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
+            </div>
+            <span id="seller-name">JumpyLion</span>
+            <span id="category-name">Weapons</span>
+            <span id="price-number">20,000g</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
