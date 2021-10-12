@@ -1,39 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="style/authentication.css">
+{% endblock %}
+{% block script %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://play.retro-mmo.com/res/images/badges/subscriber.png" type="image/x-icon">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/authentication.css">
-    <title>RetroMMarket</title>
+{% block content %}
+<form id="login-form" action="/login" method="POST">
+    <label>Email:</label>
+    <input type="text" name="email" value="" placeholder="Email" />
+    <label>Password:</label>
+    <input type="password" name="password" value="" placeholder="Passsword" />
+    <span id="error-message">{{ errorMessage }}</span>
+    <button type="submit">Login</button>
+</form>
+<a href="/register">Click here to create an account!</a>
+{% endblock %} 
 
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
-</head>
-
-<body>
-    <div id="main-browse-layout-space-div"></div>
-    <div id="main-browse-layout-div">
-        <h1 id="title">RetroMMarket</h1>
-        <div id="main-features-div">
-            <form id="login-form" action="/login" method="POST">
-                <label>Email:</label>
-                <input type="text" name="email" value="" placeholder="Email" />
-                <label>Password:</label>
-                <input type="password" name="password" value="" placeholder="Passsword" />
-                <span id="error-message">{{ errorMessage }}</span>
-                <button type="submit">Login</button>
-            </form>
-            <a href="/register">Click here to create an account!</a>
-        </div>
-    </div>
-    <div id="main-browse-layout-space-div"></div>
-</body>
-
-</html>
