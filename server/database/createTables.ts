@@ -18,5 +18,16 @@ function createTables(){
             used BOOLEAN DEFAULT false,
             userId INTEGER REFERENCES users(id)
         );
+
+        /* sell offers
+        ******************/
+        CREATE TABLE IF NOT EXISTS sellOffers(
+            id SERIAL PRIMARY KEY,
+            item VARCHAR(50) NOT NULL,
+            price INTEGER,
+            amount INTEGER,
+            sellerId INTEGER REFERENCES users(id),
+            date bigint
+        );
     `);
 }

@@ -1,0 +1,147 @@
+{
+    "Agility Boost": {
+        "image": "items/Agility_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Agility_Boost"
+    },
+    "Birthday Hat 1": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Birthday_Hat_1"
+    },
+    "Birthday Hat 2": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Birthday_Hat_2"
+    },
+    "Birthday Hat 3": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Birthday_Hat_3"
+    },
+    "Bone Bracelet": {
+        "image": "items/Bone_Bracelet.png",
+        "category": "unknown",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Bone_Bracelet"
+    },
+    "Chocolate Cake": {
+        "image": "items/Chocolate_Cake.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Chocolate_Cake"
+    },
+    "Classic Dye": {
+        "image": "items/Classic_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Classic_Dye"
+    },
+    "Defense Boost": {
+        "image": "items/Defense_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Defense_Boost"
+    },
+    "Dented Helm": {
+        "image": "items/Dented_Helmet.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dented_Helm"
+    },
+    "Devil Horns": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Devil_Horns"
+    },
+    "Goblin Dye": {
+        "image": "items/Goblin_Clothes_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Goblin_Dye"
+    },
+    "Intelligence Boost": {
+        "image": "items/Intelligence_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Intelligence_Boost"
+    },
+    "Jagged Crown": {
+        "image": "items/Jagged_Crown.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Jagged_Crown"
+    },
+    "Leather Armor": {
+        "image": "items/Leather_Armor.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Leather_Armor"
+    },
+    "Luck Boost": {
+        "image": "items/Luck_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Luck_Boost"
+    },
+    "Mage Hat": {
+        "image": "items/Mage_Hat.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Mage_Hat"
+    },
+    "Padded Garb": {
+        "image": "items/Padded_Garb.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Padded_Garb"
+    },
+    "Pet Rock": {
+        "image": "items/Pet_Rock.png",
+        "category": "unknown",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Pet_Rock"
+    },
+    "Pink Hair Dye": {
+        "image": "items/Pink_Hair_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Pink_Hair_Dye"
+    },
+    "Princess Crown": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Princess_Crown"
+    },
+    "Rockstar Hair": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Rockstar_Hair"
+    },
+    "Rusty Dagger": {
+        "image": "items/Rusty_Dagger.png",
+        "category": "Weapons",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Rusty_Dagger"
+    },
+    "Strength Boost": {
+        "image": "items/Strength_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Strength_Boost"
+    },
+    "Sunglasses": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Sunglasses"
+    },
+    "Sunglasses L": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Sunglasses_L"
+    },
+    "Tattered Cloak": {
+        "image": "items/Tattered_Cloak.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Tattered_Cloak"
+    },
+    "The Tenderizer": {
+        "image": "items/Charged_Pound.png",
+        "category": "Weapons",
+        "wiki": "https://wiki.retro-mmo.com/wiki/The_Tenderizer"
+    },
+    "Vanilla Cake": {
+        "image": "items/Vanilla_Cake.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Vanilla_Cake"
+    },
+    "Wisdom Boost": {
+        "image": "items/Wisdom_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Wisdom_Boost"
+    }
+}

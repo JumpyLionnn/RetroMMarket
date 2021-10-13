@@ -7,9 +7,13 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nunjucks = require("nunjucks");
+const fs = require("fs");
 
 // setting up variables
 const cwd = process.cwd();
+
+// loading data
+const items = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/items.json")).toString());
 
 // setting up the https server
 const app = express();
@@ -54,9 +58,11 @@ app.get("/register", checkAuth, (req: ExpressRequest, res: ExpressResponse) => r
 app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
 
 
-app.post("/register", registerRoute);
-app.post("/login", loginRoute);
-app.post("/logout", logoutRoute);
+app.post("/register", checkAuth, registerRoute);
+app.post("/login", checkAuth, loginRoute);
+app.post("/logout", verifyAuth, logoutRoute);
+
+app.post("/sell", verifyAuth, sellRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

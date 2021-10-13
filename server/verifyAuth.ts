@@ -1,6 +1,7 @@
 function verifyAuth(req: ExpressRequest, res: ExpressResponse, next: () => void){
     const token = req.cookies["auth-token"];
     if(process.env.NODE_ENV !== "production" && req.query.access === "true"){
+        req.user = {id: 1};
         return next();
     }
     if(!token){
