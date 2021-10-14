@@ -9,12 +9,27 @@
     {% block script %}{% endblock %}
 </head>
 
-<div id="main-browse-layout-space-div"></div>
-<div id="main-browse-layout-div">
-    <h1 id="title">RetroMMarket</h1>
-    <div id="main-features-div">
+<div id="main-wrapper">
+    <header id="main-header">
+        <a href="/">RetroMMarket</a>
+        <div id="navbar">
+            <ul>
+                <li><a>Listings</a></li>
+                <li><a>Orders</a></li>
+                <li><a>Profile</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="main-sidebar">
+        {% block sidebar %}{% endblock %}
+    </div>
+    <div id="main-content">
         {% block content %}{% endblock %}
     </div>
+    <footer id="main-footer">
+        <div>Made by JumpyLion and CornerLord</div>
+        <div>View the source code on GitHub</div>
+        <div>Play RetroMMO here</div>
+    </footer>
 </div>
-<div id="main-browse-sorting-layout-div"></div>
-<div id="main-browse-layout-half-space-div"></div> 
