@@ -62,7 +62,7 @@ app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => logi
 
 app.post("/register", checkAuth, registerRoute);
 app.post("/login", checkAuth, loginRoute);
-app.post("/logout", verifyAuth, logoutRoute);
+app.get("/logout", verifyAuth, logoutRoute);
 
 app.post("/sell", verifyAuth, sellRoute);
 app.get("/find/:query", verifyAuth, findSellOfferRoute);
