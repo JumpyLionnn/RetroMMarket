@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% block css %}
 <link rel="stylesheet" href="style/authentication.css">
+<style>
+    /* Magic to remove the sidebar to center the content */
+    #main-wrapper {
+        grid-template-columns: 0fr 3fr;
+    }
+</style>
 {% endblock %}
 {% block script %}
 <script>
