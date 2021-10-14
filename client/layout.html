@@ -8,15 +8,32 @@
     {% block css %}{% endblock %} {% block script %}{% endblock %}
 </head>
 
-<div id="main-browse-layout-space-div"></div>
-<div id="main-browse-layout-div">
-    <h1 id="title">RetroMMarket</h1>
-    <div id="main-features-div">
-        {% if logoutNeeded %}
-        <form action="/logout" , method="POST">
-            <input id="logout-button" type="submit" value="logout">
-        </form>
-        {% endif %} {% block content %}{% endblock %}
+<div id="main-wrapper">
+    <header id="main-header">
+        <a href="/">RetroMMarket</a>
+        <div id="navbar">
+            <ul>
+                {% if loggedIn %}
+                <li><a href="/">Browse</a></li>
+                <li><a>Your Orders</a></li>
+                <li><a>Profile</a></li>
+                <li><a>Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    <div id="main-sidebar">
+        {% block sidebar %}{% endblock %}
     </div>
+    <div id="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer id="main-footer">
+        <div>Made by JumpyLion and CornerLord</div>
+        <div>View the source code on <a href="https://github.com/JumpyLionnn/RetroMMarket">GitHub</a></div>
+        <div>Play RetroMMO <a href="https://play.retro-mmo.com/">here</a></div>
+    </footer>
 </div>
-<div id="main-browse-layout-space-div"></div>

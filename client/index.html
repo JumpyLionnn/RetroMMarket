@@ -1,33 +1,78 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {% block css %}
+<link rel="stylesheet" href="style/index.css"> {% endblock %} {% block sidebar %}
+<div id="sidebar-content">
+    <div id="sidebar-subtitle">Item Type:</div>
+    <div id="item-categories">
+        <a href="?filter=none">&#9675; All</a>
+        <a href="?filter=armors">&#9675; Armors</a>
+        <a href="?filter=consumables">&#9675; Consumables</a>
+        <a href="?filter=cosmetics">&#9675; Cosmetics</a>
+        <a href="?filter=weapons">&#9675; Weapons</a>
+    </div>
+    <hr>
+    <a href="?filter=onlineOnly">&#9633; Online Sellers Only</a>
+    <hr>
+</div>
+{% endblock %} {% block content %}
 <div id="item-browser">
     <div id="menu-container">
         <div id="menu-search-bar">
             <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off">
-            <button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button>
+            <div id="search-button-container"><button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button></div>
         </div>
-        <button id="cart-button"><img src="assets/shoppingCart.png" alt="" height="32px">Cart</button>
-        <div id="item-categories">
-            <button>Armors</button>
-            <button>Consumables</button>
-            <button>Cosmetics</button>
-            <button>Weapons</button>
-        </div>
+        <select id="order-selector">
+            <optgroup label="Price">
+                <option>Low to High</option>
+                <option>High to Low</option>
+            </optgroup>
+            <optgroup label="Date">
+                <option>Newest First</option>
+                <option>Oldest First</option>
+            </optgroup>
+        </select>
     </div>
     <div id="items-list">
-        <div id="item-sort-menu">
-            <span>Item</span>
-            <span>Seller</span>
-            <span>Category</span>
-            <span>Price</span>
+        <div id="item-card">
+            <div id="item-preview">
+                <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
+                <span id="item-name">The Tenderizer</span>
+                <span id="category-name">Weapons</span>
+            </div>
+            <div id="seller-details">
+                <span id="seller-name">JumpyLion</span>
+                <span id="seller-status">&#9679;</span>
+            </div>
+            <div id="item-details">
+                <div id="item-count-selector">
+                    <div>Item count:</div>
+                    <input type="number" value="1">
+                </div>
+                <div id="price-number">20,000g</div>
+            </div>
+            <div id="buy-button-container">
+                <button id="buy-button">BUY NOW</button>
+            </div>
         </div>
         <div id="item-card">
             <div id="item-preview">
-                <span id="item-name">The Tenderizer</span>
                 <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
+                <span id="item-name">The Tenderizer</span>
+                <span id="category-name">Weapons</span>
             </div>
-            <span id="seller-name">JumpyLion</span>
-            <span id="category-name">Weapons</span>
-            <span id="price-number">20,000g</span>
+            <div id="seller-details">
+                <span id="seller-name">JumpyLion</span>
+                <span id="seller-status">&#9679;</span>
+            </div>
+            <div id="item-details">
+                <div id="item-count-selector">
+                    <div>Item count:</div>
+                    <input type="number" value="1">
+                </div>
+                <div id="price-number">20,000g</div>
+            </div>
+            <div id="buy-button-container">
+                <button id="buy-button">BUY NOW</button>
+            </div>
         </div>
     </div>
 </div>
