@@ -29,6 +29,7 @@
         "jsonwebtoken": "^8.5.1",
         "nunjucks": "^3.2.3",
         "pg": "^8.7.1",
+        "request": "^2.88.2",
         "socket-io": "^1.0.0"
     },
     "devDependencies": {

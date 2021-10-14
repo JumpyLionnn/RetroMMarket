@@ -7,6 +7,8 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
         return res.status(400).send("the item does not exist.");
     }
 
+    const category = items[item].category;
+
     const price = req.body.price;
     if(typeof price !== "number"){
         return res.status(400).send("the price is not valid.");
@@ -23,6 +25,6 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
         return res.status(400).send("the amount is not valid.");
     }
 
-    await addSellOffer(item, price, amount, req.user.id);
+    await addSellOffer(item, category, price, amount, req.user.id);
     res.send("success");
 }

@@ -8,12 +8,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
+const request = require("request");
 
 // setting up variables
 const cwd = process.cwd();
 
 // loading data
 const items = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/items.json")).toString());
+const categories = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/categories.json")).toString());
 
 // setting up the https server
 const app = express();
@@ -63,6 +65,7 @@ app.post("/login", checkAuth, loginRoute);
 app.post("/logout", verifyAuth, logoutRoute);
 
 app.post("/sell", verifyAuth, sellRoute);
+app.get("/find/:query", verifyAuth, findSellOfferRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

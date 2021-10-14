@@ -24,6 +24,7 @@ function createTables(){
         CREATE TABLE IF NOT EXISTS sellOffers(
             id SERIAL PRIMARY KEY,
             item VARCHAR(50) NOT NULL,
+            category VARCHAR(50),
             price INTEGER,
             amount INTEGER,
             sellerId INTEGER REFERENCES users(id),
