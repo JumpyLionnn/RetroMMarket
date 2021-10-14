@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% block css %}
 <link rel="stylesheet" href="style/authentication.css">
+<style>
+    /* Magic to remove the sidebar to center the content */
+    #main-wrapper {
+        grid-template-columns: 0fr 3fr;
+    }
+</style>
 {% endblock %}
 {% block script %}
 <script>
@@ -16,9 +22,11 @@
     <input type="text" name="email" value="" placeholder="Email" />
     <label>Password:</label>
     <input type="password" name="password" value="" placeholder="Passsword" />
+    {% if errorMessage %}
     <span id="error-message">{{ errorMessage }}</span>
+    {% endif %}
     <button type="submit">Login</button>
 </form>
-<a href="/register">Click here to create an account!</a>
+<a id="register-link" href="/register">Click here to create an account!</a>
 {% endblock %} 
 

@@ -14,10 +14,15 @@
         <a href="/">RetroMMarket</a>
         <div id="navbar">
             <ul>
-                <li><a>Listings</a></li>
-                <li><a>Orders</a></li>
+                {% if loggedIn %}
+                <li><a href="/">Browse</a></li>
+                <li><a>Your Orders</a></li>
                 <li><a>Profile</a></li>
                 <li><a>Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {% endif %}
             </ul>
         </div>
     </header>
@@ -29,7 +34,7 @@
     </div>
     <footer id="main-footer">
         <div>Made by JumpyLion and CornerLord</div>
-        <div>View the source code on GitHub</div>
-        <div>Play RetroMMO here</div>
+        <div>View the source code on <a href="https://github.com/JumpyLionnn/RetroMMarket">GitHub</a></div>
+        <div>Play RetroMMO <a href="https://play.retro-mmo.com/">here</a></div>
     </footer>
 </div>

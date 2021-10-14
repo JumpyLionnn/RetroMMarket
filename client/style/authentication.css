@@ -20,11 +20,12 @@
     padding-left: 0;
 }
 
-#main-features-div>a {
+#register-link {
     display: block;
     text-align: center;
+    font-size: 1.5em;
 }
 
 #error-message {
-    color: red;
+   color: red;
 }
