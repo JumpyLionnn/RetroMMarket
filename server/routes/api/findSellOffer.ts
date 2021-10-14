@@ -1,7 +1,8 @@
 async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     const query = req.params.query;
 
-    let dbQuery = `SELECT * FROM sellOffers WHERE item ILIKE '%${query.trim()}%' AND amount > 0`;
+    let dbQuery = `SELECT sellOffers.id, item, category, price, amount, sellerId, retrommousername FROM sellOffers, users
+     WHERE users.id = sellerid AND item ILIKE '%${query.trim()}%' AND amount > 0`;
 
     const categoryFilter = req.query.category;
     if(!categories.includes(categoryFilter) && categoryFilter !== undefined){
@@ -38,6 +39,5 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     else if(sort !== undefined){
         return res.status(400).send("sort can only be ASC or DESC.");
     }
-
     res.send((await client.query(dbQuery)).rows);
 }
