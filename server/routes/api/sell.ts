@@ -21,7 +21,7 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
     if(typeof amount !== "number"){
         return res.status(400).send("the amount is not valid.");
     }
-    if(amount < 0){
+    if(amount <= 0){
         return res.status(400).send("the amount is not valid.");
     }
 

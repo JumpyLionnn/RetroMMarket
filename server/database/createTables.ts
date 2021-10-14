@@ -30,5 +30,15 @@ function createTables(){
             sellerId INTEGER REFERENCES users(id),
             date bigint
         );
+
+        /* buyOrders
+        **************/
+        CREATE TABLE IF NOT EXISTS buyOrders(
+            id SERIAL PRIMARY KEY,
+            sellOfferId INTEGER REFERENCES sellOffers(id),
+            buyerId INTEGER,
+            amount INTEGER,
+            date bigint
+        );
     `);
 }

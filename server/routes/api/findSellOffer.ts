@@ -15,7 +15,7 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     if(onlineSellersOnlyString === "true"){
         const onlineUsers = await getUsersIdIfOnline();
         if(onlineUsers.length === 0){
-            return res.send("There are no sell offers available from online users.");
+            return res.status(400).send("There are no sell offers available from online users.");
         }
         let onlineUsersIds = "";
         for(let i = 0; i < onlineUsers.length; i++){

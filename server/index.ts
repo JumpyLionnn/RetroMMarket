@@ -65,6 +65,7 @@ app.post("/login", checkAuth, loginRoute);
 app.get("/logout", verifyAuth, logoutRoute);
 
 app.post("/sell", verifyAuth, sellRoute);
+app.post("/buy", verifyAuth, buyRoute);
 app.get("/find/:query", verifyAuth, findSellOfferRoute);
 
 server.listen(process.env.PORT || 3000, () => {
