@@ -18,7 +18,8 @@
     function buyItem(id) {
         const amount = document.getElementById(id).value;
         fetch("/buy", {
-            method: "POST", 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 sellOfferId: id,
                 amount: amount
