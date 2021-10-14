@@ -45,48 +45,29 @@
         </select>
     </div>
     <div id="items-list">
+        {% for item in items %}
         <div id="item-card">
             <div id="item-preview">
-                <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
-                <span id="item-name">The Tenderizer</span>
-                <span id="category-name">Weapons</span>
+                <img src="{{item.image}}" alt="">
+                <span id="item-name">{{item.name}}</span>
+                <span id="category-name">{{item.category}}</span>
             </div>
             <div id="seller-details">
-                <span id="seller-name">JumpyLion</span>
+                <span id="seller-name">{{item.seller}}</span>
                 <span id="seller-status">&#9679;</span>
             </div>
             <div id="item-details">
                 <div id="item-count-selector">
                     <div>Item count:</div>
-                    <input type="number" value="1" id="1"> <!-- set id to sellOrderId -->
+                    <input type="number" value="1" id="{{item.sellOrderId}}" min="1" max="{{item.count}}">
                 </div>
-                <div id="price-number">20,000g</div>
+                <div id="price-number">{{item.price}}</div>
             </div>
             <div id="buy-button-container">
-                <button id="buy-button" onclick="buyItem(1)">BUY NOW</button> <!-- set function param to sellOrderId -->
+                <button id="buy-button" value="{{item.sellOrderId}}" onclick="buyItem(this.value)">BUY NOW</button>
             </div>
         </div>
-        <div id="item-card">
-            <div id="item-preview">
-                <img src="https://play.retro-mmo.com/res/images/items/theTenderizer.png" alt="">
-                <span id="item-name">The Tenderizer</span>
-                <span id="category-name">Weapons</span>
-            </div>
-            <div id="seller-details">
-                <span id="seller-name">JumpyLion</span>
-                <span id="seller-status">&#9679;</span>
-            </div>
-            <div id="item-details">
-                <div id="item-count-selector">
-                    <div>Item count:</div>
-                    <input type="number" value="1">
-                </div>
-                <div id="price-number">20,000g</div>
-            </div>
-            <div id="buy-button-container">
-                <button id="buy-button">BUY NOW</button>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
