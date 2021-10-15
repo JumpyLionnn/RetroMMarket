@@ -1,8 +1,21 @@
 async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
-    const query = req.params.query;
 
     let dbQuery = `SELECT sellOffers.id, item, category, price, amount, sellerId, retrommousername FROM sellOffers, users
-     WHERE users.id = sellerid AND item ILIKE '%${query.trim()}%' AND amount > 0`;
+     WHERE users.id = sellerid AND amount > 0`;
+
+    const query = req.query.query;
+    if(typeof query === "string"){
+        if(query.length < 50){
+            dbQuery += ` AND item ILIKE '%${query.trim()}%'`
+        }
+        else{
+        return res.status(400).send("the query is too long.");
+        }
+    }
+    else if(query !== undefined){
+        return res.status(400).send("the query is not valid.");
+    }
+    
 
     const categoryFilter = req.query.category;
     if(!categories.includes(categoryFilter) && categoryFilter !== undefined){
