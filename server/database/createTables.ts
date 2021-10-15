@@ -38,6 +38,8 @@ function createTables(){
             sellOfferId INTEGER REFERENCES sellOffers(id),
             buyerId INTEGER,
             amount INTEGER,
+            sellerDelivered BOOLEAN,
+            buyerDelivered BOOLEAN,
             date bigint
         );
     `);

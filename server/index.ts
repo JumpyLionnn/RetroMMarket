@@ -67,6 +67,7 @@ app.get("/logout", verifyAuth, logoutRoute);
 app.post("/sell", verifyAuth, sellRoute);
 app.post("/buy", verifyAuth, buyRoute);
 app.get("/find/:query", verifyAuth, findSellOfferRoute);
+app.post("/buyOrderDelivered", verifyAuth, buyOrderDeliveredRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");
