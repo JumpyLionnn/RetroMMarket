@@ -70,6 +70,7 @@ app.get("/find", verifyAuth, findSellOfferRoute);
 app.post("/buyOrderDelivered", verifyAuth, buyOrderDeliveredRoute);
 
 app.get("/sellOffers", verifyAuth, getSellOffersRoute);
+app.get("/buyOrders", verifyAuth, getBuyOrdersRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");
