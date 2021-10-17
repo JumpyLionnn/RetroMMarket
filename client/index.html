@@ -14,20 +14,7 @@
     <hr>
 </div>
 {% endblock %} {% block content %}
-<script type = "text/javascript">
-    function buyItem(id) {
-        const amount = document.getElementById(id).value;
-        fetch("/buy", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                sellOfferId: id,
-                amount: amount
-            })}).then(res => {
-            console.log("Request complete! response:", res);
-        });
-    }
-</script>
+<script src="src/index.js" type="text/javascript" defer></script>
 <div id="item-browser">
     <div id="menu-container">
         <div id="menu-search-bar">
@@ -45,30 +32,6 @@
             </optgroup>
         </select>
     </div>
-    <div id="items-list">
-        {% for item in items %}
-        <div id="item-card">
-            <div id="item-preview">
-                <img src="{{item.image}}" alt="">
-                <span id="item-name">{{item.name}}</span>
-                <span id="category-name">{{item.category}}</span>
-            </div>
-            <div id="seller-details">
-                <span id="seller-name">{{item.seller}}</span>
-                <span id="seller-status">&#9679;</span>
-            </div>
-            <div id="item-details">
-                <div id="item-count-selector">
-                    <div>Item count:</div>
-                    <input type="number" value="1" id="{{item.sellOrderId}}" min="1" max="{{item.count}}">
-                </div>
-                <div id="price-number">{{item.price}}</div>
-            </div>
-            <div id="buy-button-container">
-                <button id="buy-button" value="{{item.sellOrderId}}" onclick="buyItem(this.value)">BUY NOW</button>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    <div id="items-list"></div>
 </div>
 {% endblock %}
