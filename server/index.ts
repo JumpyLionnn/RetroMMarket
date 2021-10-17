@@ -64,6 +64,8 @@ app.post("/register", checkAuth, registerRoute);
 app.post("/login", checkAuth, loginRoute);
 app.get("/logout", verifyAuth, logoutRoute);
 
+app.post("/changeDiscordName", verifyAuth, changeDiscordNameRoute);
+
 app.post("/sell", verifyAuth, sellRoute);
 app.post("/buy", verifyAuth, buyRoute);
 app.get("/find", verifyAuth, findSellOfferRoute);
