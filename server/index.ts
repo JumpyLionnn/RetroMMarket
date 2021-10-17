@@ -12,6 +12,7 @@ const request = require("request");
 
 // setting up variables
 const cwd = process.cwd();
+const pageSize = 25;
 
 // loading data
 const items = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/items.json")).toString());
