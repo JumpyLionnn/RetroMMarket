@@ -13,7 +13,8 @@ const request = require("request");
 // setting up variables
 const cwd = process.cwd();
 const pageSize = 25;
-
+const sellOffersLimit = 5;
+const buyOrdersLimit = 5;
 // loading data
 const items = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/items.json")).toString());
 const categories = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/categories.json")).toString());
