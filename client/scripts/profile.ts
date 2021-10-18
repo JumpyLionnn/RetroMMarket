@@ -2,18 +2,21 @@ const RetroMMOUsernameEditButton = document.getElementById("RetroMMO-username-ed
 const RetroMMOUsernameEditInput = document.getElementById("RetroMMO-username-edit-input") as HTMLInputElement;
 let RetroMMOUsernameEditMode = false;
 RetroMMOUsernameEditButton.style.backgroundImage = `url("assets/editIcon.png")`;
-RetroMMOUsernameEditButton.addEventListener("click", () =>{
+RetroMMOUsernameEditButton.addEventListener("click", async () =>{
     if(RetroMMOUsernameEditMode){
-        RetroMMOUsernameEditButton.style.backgroundImage = `url("assets/editIcon.png")`;
-        RetroMMOUsernameEditInput.disabled = true;
-        fetch("/changeRetroMMOUsername", {
+        const response = await fetch("/changeRetroMMOUsername", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
             },
             body: JSON.stringify({RetroMMOUsername: RetroMMOUsernameEditInput.value})
         });
-        RetroMMOUsernameEditMode = false;
+        const text = await response.text();
+        if(text === "success"){
+            RetroMMOUsernameEditButton.style.backgroundImage = `url("assets/editIcon.png")`;
+            RetroMMOUsernameEditInput.disabled = true;
+            RetroMMOUsernameEditMode = false;
+        }
     }
     else{
         RetroMMOUsernameEditButton.style.backgroundImage = `url("assets/doneIcon.png")`;
