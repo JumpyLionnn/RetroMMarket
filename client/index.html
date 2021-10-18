@@ -6,17 +6,18 @@
 <div id="sidebar-content">
     <div id="sidebar-subtitle">Item Type:</div>
     <div id="item-categories">
-        <input id="armors" type="radio" value="Armors" onclick="changeCategory(this.value);return false;">
+        <input name="category" id="armors" type="radio" value="Armors" onclick="changeCategory(this.value);">
         <label for="armors">Armors</label><br>
-        <input id="consumables" type="radio" value="Consumables" onclick="changeCategory(this.value);return false;">
+        <input name="category" id="consumables" type="radio" value="Consumables" onclick="changeCategory(this.value);">
         <label for="consumables">Consumables</label><br>
-        <input id="cosmetics" type="radio" value="Cosmetics" onclick="changeCategory(this.value);return false;">
+        <input name="category" id="cosmetics" type="radio" value="Cosmetics" onclick="changeCategory(this.value);">
         <label for="cosmetics">Cosmetics</label><br>
-        <input id="weapons" type="radio" value="Weapons" onclick="changeCategory(this.value);return false;">
+        <input name="category" id="weapons" type="radio" value="Weapons" onclick="changeCategory(this.value);" checked>
         <label for="weapons">Weapons</label>
     </div>
     <hr>
-    <a href="#" onclick="toggleOnlineSellersOnly();return false;">&#9633; Online Sellers Only</a>
+    <input type="checkbox" onclick="toggleOnlineSellersOnly();" id="toggleOnlineSellersOnly">
+    <label for="toggleOnlineSellersOnly">Online Sellers Only</label>
     <hr>
 </div>
 {% endblock %} {% block content %}
