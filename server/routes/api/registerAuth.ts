@@ -4,12 +4,10 @@ async function registerRoute(req: ExpressRequest, res: ExpressResponse){
     if(typeof RetroMMOUsername !== "string"){
         
         return registerPageRoute(req, res, {errorMessage: "RetroMMO name is not valid."});
-        //return res.status(400).send("RetroMMO name is not valid.");
     }   
     else{
         if(RetroMMOUsername.length > 255){
             return registerPageRoute(req, res, {errorMessage: "RetroMMO name is not valid."});
-            //return res.status(400).send("RetroMMO name is not valid.");
         }
     }
 
