@@ -58,6 +58,7 @@ app.use("/assets", express.static(path.join(cwd ,"client/assets")));
 app.use("/src", express.static(path.join(cwd ,"client/build")));
 
 app.get("/", verifyAuth, homePageRoute);
+app.get("/profile", verifyAuth, profilePageRoute);
 app.get("/register", checkAuth, (req: ExpressRequest, res: ExpressResponse) => registerPageRoute(req, res, {}));
 app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
 

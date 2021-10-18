@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {% block css %}
+<link rel="stylesheet" href="style/profile.css">
+<script defer src="src/profile.js"></script>
+<style>
+    /* Magic to remove the sidebar to center the content */
+    
+    #main-wrapper {
+        grid-template-columns: 0fr 3fr;
+    }
+</style>
+{% endblock %} {% block script %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock %} {% block content %}
+<div id="account-details-wrapper">
+    <label>Email:</label>
+    <div id="editable-account-detail">
+
+        <input class="edit-input" type="text" name="email" value="{{ email }}" placeholder="Email" disabled/>
+    </div>
+
+    <label>RetroMMO username:</label>
+    <div id="editable-account-detail">
+        <input id="RetroMMO-username-edit-input" class="edit-input" type="text" value="{{ RetroMMOUsername }}" placeholder="RetroMMO username" maxlength="100" disabled/>
+        <button id="RetroMMO-username-edit-button" class="edit-button" id="RetroMMO-edit-button"></button>
+    </div>
+
+    <label>Discord name:</label>
+    <div id="editable-account-detail">
+        <input id="discord-name-edit-input" class="edit-input" type="text" value="{{ discordName }}" placeholder="discord#1234" maxlength="100" disabled/>
+        <button id="discord-name-edit-button" class="edit-button" id="discord-edit-button"></button>
+    </div>
+</div>
+{% endblock %}

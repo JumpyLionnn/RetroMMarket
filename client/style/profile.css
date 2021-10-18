@@ -1,0 +1,29 @@
+#account-details-wrapper {
+    font-size: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+label {}
+
+.edit-input {
+    float: left;
+    border-radius: 5px 0 0 5px;
+    height: 2em;
+    font-size: 1em;
+    width: 80%;
+}
+
+.edit-button {
+    float: left;
+    border-radius: 0 5px 5px 0;
+    font-size: 1em;
+    height: 2em;
+    width: 2em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    image-rendering: pixelated;
+    background-origin: content-box;
+    padding: .2em;
+}
