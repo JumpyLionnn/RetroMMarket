@@ -1,4 +1,5 @@
 let items: any;
+let itemsExtraData: any;
 
 enum sortTypes {
     ASC = "ASC",
@@ -6,6 +7,29 @@ enum sortTypes {
 };
 let sortingOrder: sortTypes = sortTypes.ASC;
 let onlineSellersOnly: boolean = false;
+
+async function getExtraItemData() {
+    const url = "/items";
+    console.log(url);
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    });
+
+    if(!res.ok) throw new Error("error")
+
+    return await res.json();
+}
+
+function getItemImage(query: string) {
+    const item = itemsExtraData[query];
+    if(item !== undefined)
+        return item.image;
+    return "";
+}
 
 class ItemCard extends HTMLDivElement {
     constructor() {
@@ -77,7 +101,7 @@ function renderItems(items: any[]) {
     (<HTMLDivElement>document.getElementById("items-list")).innerHTML = "";
     items?.forEach((item: any) => {
         const instance = document.importNode(fragment, true);
-        (<HTMLImageElement>instance.querySelector("#item-image")).src = item.image;
+        (<HTMLImageElement>instance.querySelector("#item-image")).src = `assets/${getItemImage(item.item)}`;
         (<HTMLSpanElement>instance.querySelector("#item-name")).innerHTML = item.item;
         (<HTMLSpanElement>instance.querySelector("#category-name")).innerHTML = item.category;
         (<HTMLSpanElement>instance.querySelector("#seller-name")).innerHTML = item.retrommousername;
@@ -119,6 +143,7 @@ async function toggleOnlineSellersOnly() {
 }
 
 async function firstRender() {
+    itemsExtraData = await getExtraItemData();
     items = await getSellOffers("", "Weapons", false, sortingOrder, 10);
     renderItems(items);
 }
