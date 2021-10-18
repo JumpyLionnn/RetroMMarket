@@ -25,6 +25,10 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
         return res.status(400).send("the amount is not valid.");
     }
 
+    if(await countUsersSellOffers(req.user.id) > sellOffersLimit){
+        return res.status(400).send(`you already reached the sell offer limit.(${sellOffersLimit})`);
+    }
+
     await addSellOffer(item, category, price, amount, req.user.id);
     res.send("success");
 }

@@ -1,6 +1,6 @@
 async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
-
-    let dbQuery = `SELECT sellOffers.id, item, category, price, amount, sellerId, retrommousername, discordname FROM sellOffers, users
+    let dbQuery = `SELECT sellOffers.id, item, category, price, amount, sellerId, retrommousername, discordname
+     FROM sellOffers, users
      WHERE users.id = sellerid AND amount > 0`;
 
     const query = req.query.query;
@@ -51,6 +51,24 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     }
     else if(sort !== undefined){
         return res.status(400).send("sort can only be ASC or DESC.");
+    }
+
+    dbQuery += ` LIMIT ${pageSize}`;
+
+    const page = req.query.page;
+    const isNumber = isNumeric(page);
+    if(!isNumber && page !== undefined){
+        
+        return res.status(400).send("the page must be a positive number");
+    }
+    else if(isNumber){    
+        const pageNumber = parseInt(page);
+        if(pageNumber >= 0){
+            dbQuery += ` OFFSET ${pageNumber * pageSize}`;
+        }
+        else{
+            return res.status(400).send("the page must be a positive number");
+        }
     }
     res.send((await client.query(dbQuery)).rows);
 }
