@@ -71,8 +71,6 @@ menu layout
 }
 
 #item-categories {
-    display: flex;
-    flex-direction: column;
 }
 
 #sidebar-content {
