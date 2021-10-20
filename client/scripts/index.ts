@@ -7,6 +7,7 @@ enum sortTypes {
 };
 let sortingOrder: sortTypes = sortTypes.ASC;
 let onlineSellersOnly: boolean = false;
+let currentCategory: string = "Weapons";
 
 async function getExtraItemData() {
     const url = "/items";
@@ -62,6 +63,10 @@ class ItemCard extends HTMLDivElement {
 
 customElements.define("item-card", ItemCard, { extends: "div" });
 
+function displayErrorMessage(message: string) {
+    (<HTMLDivElement>document.getElementById("items-list")).innerHTML = message;
+}
+
 async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: sortTypes, upperLimit: number) {
     const url = `/find?query=${query}&category=${category}&onlineSellersOnly=${onlineSellersOnly}&sort=${sortBy}&to=${upperLimit}`;
     console.log(url);
@@ -73,7 +78,7 @@ async function getSellOffers(query: string, category: string, onlineSellersOnly:
         }
     });
 
-    if(!res.ok) throw new Error("error")
+    if(!res.ok) displayErrorMessage("No items found with the current search parameters.")
 
     return await res.json();
 }
@@ -91,7 +96,10 @@ function compareReverse(b: any, a: any) {
 }
 
 function renderItems(items: any[]) {
-    if(items === undefined) return;
+    if(items === undefined || items.length === 0) {
+        displayErrorMessage("No items found with the current search parameters.")
+        return;
+    };
     if(sortingOrder === sortTypes.ASC) items.sort(compare);
     else items.sort(compareReverse);
 
@@ -132,19 +140,20 @@ function searchItem(query: string) {
 }
 
 async function changeCategory(category:string) {
-    items = await getSellOffers("", category, false, sortingOrder, 10);
+    currentCategory = category;
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
     renderItems(items);
 }
 
 async function toggleOnlineSellersOnly() {
     onlineSellersOnly = !onlineSellersOnly;
-    items = await getSellOffers("", "Weapons", onlineSellersOnly, sortingOrder, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
     renderItems(items);
 }
 
 async function firstRender() {
     itemsExtraData = await getExtraItemData();
-    items = await getSellOffers("", "Weapons", false, sortingOrder, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
     renderItems(items);
 }
 
@@ -172,6 +181,6 @@ async function buyItem(e: HTMLButtonElement) {
     console.log(res);
     if(!res.ok) throw new Error("error")
 
-    items = await getSellOffers("", "Weapons", false, sortTypes.ASC, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, 10);
     renderItems(items);
 }
