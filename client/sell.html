@@ -1,0 +1,47 @@
+{% extends "layout.html" %} {% block css %}
+<link rel="stylesheet" href="style/sell.css">
+<script defer src="src/sell.js"></script>
+<style>
+    /* Magic to remove the sidebar to center the content */
+    
+    #main-wrapper {
+        grid-template-columns: 0fr 3fr;
+    }
+</style>
+{% endblock %} {% block script %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock %} {% block content %}
+<h1 id="page-title">Create Sell Offer</h1>
+<form id="sell-form" action="/sell" method="POST">
+    <div id="selected-item-card">
+        <img id="selected-item-card-image" src="assets/items/unknown.png" alt="">
+        <h2 id="current-item-name">unknown item</h2>
+        <input id="current-item-name-field" name="item" type="hidden" />
+    </div>
+    <div>
+        <h2 id="field-label">Amount:</h2>
+        <input class="field-input" type="number" name="amount" value="1" min="1" max="10000" />
+    </div>
+    <div id="field">
+        <h2 id="field-label">Price:</h2>
+        <input class="field-input" type="number" name="price" value="1" min="1" max="10000000" />
+    </div>
+    <button id="submit-sell-offer-button" type="submit">Sell</button>
+</form>
+
+<div id="item-menu-element-card" style="display:none;">
+    <div id="item-menu-header">
+        <h1>Select Item</h1>
+        <button id="close-item-menu">X</button>
+    </div>
+    <div id="item-menu-search-bar">
+        <input type="search" name="search" id="item-search-input" placeholder="Search..." autocomplete="off">
+    </div>
+    <div id="item-menu-list">
+    </div>
+</div>
+{% endblock %}

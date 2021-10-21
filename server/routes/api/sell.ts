@@ -9,15 +9,15 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
 
     const category = items[item].category;
 
-    const price = req.body.price;
+    const price = parseInt(req.body.price as string);
     if(typeof price !== "number"){
         return res.status(400).send("the price is not valid.");
     }
-    if(price < 0){
+    if(price <= 0){
         return res.status(400).send("the price is not valid.");
     }
 
-    const amount = req.body.amount;
+    const amount = parseInt(req.body.amount as string);
     if(typeof amount !== "number"){
         return res.status(400).send("the amount is not valid.");
     }
