@@ -11,7 +11,6 @@ let currentCategory: string = "Weapons";
 
 async function getExtraItemData() {
     const url = "/items";
-    console.log(url);
     const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -69,7 +68,6 @@ function displayErrorMessage(message: string) {
 
 async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: sortTypes, upperLimit: number) {
     const url = `/find?query=${query}&category=${category}&onlineSellersOnly=${onlineSellersOnly}&sort=${sortBy}&to=${upperLimit}`;
-    console.log(url);
     const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -103,7 +101,6 @@ function renderItems(items: any[]) {
     if(sortingOrder === sortTypes.ASC) items.sort(compare);
     else items.sort(compareReverse);
 
-    console.log(items);
     const fragment = document.createElement("div", { is: "item-card" });
 
     (<HTMLDivElement>document.getElementById("items-list")).innerHTML = "";
@@ -167,7 +164,6 @@ async function buyItem(e: HTMLButtonElement) {
     const amount = parseInt((<HTMLInputElement>parentDiv!.querySelector("#item-count-number-input"))!.value);
     
     const url = `/buy`;
-    console.log(url);
     const res = await fetch(url, {
         method: "POST",
         headers: {
@@ -178,8 +174,7 @@ async function buyItem(e: HTMLButtonElement) {
             amount: amount
         })
     });
-    console.log(res);
-    if(!res.ok) throw new Error("error")
+    if(!res.ok) throw new Error(await res.text())
 
     items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, 10);
     renderItems(items);
