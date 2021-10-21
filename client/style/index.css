@@ -25,6 +25,7 @@ menu layout
     font-size: 1.5em;
     margin: 0 .2em 0 .5em;
     border: none;
+    outline: none;
 }
 
 #search-button-container {
@@ -70,8 +71,7 @@ menu layout
     vertical-align: middle;
 }
 
-#item-categories {
-}
+#item-categories {}
 
 #sidebar-content {
     font-size: 1.5em;
@@ -110,9 +110,7 @@ items
 
 #item-preview {
     display: grid;
-    grid-template-areas: 
-        "image title"
-        "image category";
+    grid-template-areas: "image title" "image category";
     grid-template-columns: 1fr 3fr;
 }
 
@@ -201,9 +199,7 @@ items
     #menu-container {
         flex-flow: row;
     }
-
     #order-selector {
         margin-left: auto;
-        
     }
 }
