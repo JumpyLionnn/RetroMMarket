@@ -8,7 +8,7 @@ async function buyOrderDeliveredRoute(req: ExpressRequest, res: ExpressResponse)
         return res.status(400).send("the order id is not valid.");
     }
     
-    if(order.sellerId === req.user.id){
+    if(order.sellerid === req.user.id){
         if(order.sellerdelivered === true){
             return res.status(400).send("You already delivered this order.");
         }
