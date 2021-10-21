@@ -1,7 +1,7 @@
 async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     let dbQuery = `SELECT sellOffers.id, item, category, price, amount, sellerId, retrommousername, discordname
      FROM sellOffers, users
-     WHERE users.id = sellerid AND amount > 0`;
+     WHERE users.id != sellerid AND amount > 0`;
 
     const query = req.query.query;
     if(typeof query === "string"){
