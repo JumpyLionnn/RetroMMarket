@@ -184,5 +184,3 @@ async function buyItem(e: HTMLButtonElement) {
     items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, 10);
     renderItems(items);
 }
-
-export {}

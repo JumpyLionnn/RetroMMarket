@@ -20,7 +20,7 @@ const currentItemName = document.getElementById("current-item-name") as HTMLHead
 
 let currentItem = document.getElementById("current-item-name-field") as HTMLInputElement;
 
-class ItemCard extends HTMLDivElement {
+class ItemOptionCard extends HTMLDivElement {
     constructor() {
         super();
         this.innerHTML = `
@@ -33,7 +33,7 @@ class ItemCard extends HTMLDivElement {
 
 const itemList = document.getElementById("item-menu-list") as HTMLDivElement;
 
-customElements.define("item-card", ItemCard, { extends: "div" });
+customElements.define("item-card", ItemOptionCard, { extends: "div" });
 
 
 fetch("/items").then(async (res: Response) => {
@@ -74,7 +74,5 @@ sellForm.addEventListener("submit", (e) => {
         e.preventDefault();
     }
 });
-
-export {}
 
 
