@@ -1,4 +1,51 @@
-#order-card {
-    margin: 1em;
-    font-size: 1.5em;
+#orders-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: .5em;
+    justify-content: space-between;
+}
+
+#buying-list>div, #selling-list>div {
+    font-size: 2em;
+}
+
+button {
+    transform: translateY(25%);
+}
+
+#hidden-row button {
+    transform: translateY(75%);
+}
+
+#buying-list button {
+    transform: translateY(0%);
+}
+
+#hidden-row {
+    background: #eee;
+}
+
+th {
+    text-align: left;
+}
+
+td, th {
+    padding: .5em;
+}
+
+tr {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+@media (min-width: 1080px) {
+    #orders-wrapper {
+        flex-flow: row;
+    }
 }

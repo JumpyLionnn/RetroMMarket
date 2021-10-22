@@ -58,7 +58,7 @@ async function renderOrders() {
             itemName.innerHTML = order.item;
             itemAmount.innerHTML = order.amount;
             itemPrice.innerHTML = order.price;
-            sellerName.innerHTML = order.retrommousername;
+            sellerName.innerHTML = `<div>${order.retrommousername}</div><div>${order.discordname}</div>`;
             cancelButton.onclick = () => cancelOrder(order.id);
             cancelButton.innerText = "Cancel Order"
             cancelButton.disabled = order.buyerdelivered || order.sellerdelivered;
@@ -70,7 +70,9 @@ async function renderOrders() {
             tr.append(orderID, itemName, itemAmount, itemPrice, sellerName, buttons);
             table.append(tr);
         });
-        (<HTMLDivElement>document.getElementById("buying-list")).appendChild(table);
+        const title = document.createElement("div");
+        title.innerHTML = "Buy orders:";
+        (<HTMLDivElement>document.getElementById("buying-list")).append(title, table);
     }
 }
 
@@ -119,7 +121,7 @@ async function renderOffers() {
                 const buyerAmount = document.createElement("td");
                 
                 buyOrderID.innerHTML = order.id;
-                buyerName.innerHTML = order.retrommousername;
+                buyerName.innerHTML = `<div>${order.retrommousername}</div><div>${order.discordname}</div>`;
                 buyerAmount.innerHTML = order.amount;
                 
                 const receiveButton = document.createElement("button");        
@@ -129,13 +131,16 @@ async function renderOffers() {
                 
                 tr = document.createElement("tr");
                 tr.style.display = "none";
+                tr.id = "hidden-row";
                 tr.append(buyOrderID, buyerName, buyerAmount, document.createElement("td"), receiveButton)
                 buyOrderRows.push(tr);
                 table.append(tr);
             });
             buyersButton.onclick = () => toggleBuyersList(buyOrderRows);
         });
-        (<HTMLDivElement>document.getElementById("selling-list")).appendChild(table);
+        const title = document.createElement("div");
+        title.innerHTML = "Sell offers:";
+        (<HTMLDivElement>document.getElementById("selling-list")).append(title, table);
     }
 }
 
