@@ -1,32 +1,3 @@
-let orders: any;
-
-class OrderCard extends HTMLDivElement {
-    constructor() {
-        super();
-        this.innerHTML = `
-        <div id="order-card">
-            <div id="item-preview">
-                <span id="item-name"></span>
-            </div>
-            <div id="seller-details">
-                <span id="seller-name"></span>
-                <span id="seller-status">&#9679;</span>
-            </div>
-            <div id="item-details">
-                <span id="item-count"></span>
-                <span id="item-price"></span>
-            </div>
-            <div id="order-buttons">
-                <button id="cancel-button" value="" onclick="cancelOrder(this.value)">CANCEL ORDER</button>
-                <button id="receive-button" value="" onclick="receiveOrder(this.value)">ITEM RECEIVED</button>
-            </div>
-        </div>
-        `;
-    }
-}
-
-customElements.define("order-card", OrderCard, { extends: "div" });
-
 async function getBuyOrders() {
     const url = `/buyOrders`;
     const res = await fetch(url, {
@@ -42,33 +13,147 @@ async function getBuyOrders() {
     return await res.json();
 }
 
+async function getSellOrders() {
+    const url = `/sellOffers`;
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    });
+
+    if(!res.ok) console.log("You have no sell offers.")
+
+    return await res.json();
+}
+
 async function renderOrders() {
-    orders = await getBuyOrders();
+    const orders = await getBuyOrders();
 
     if(orders === undefined || orders.length === 0) {
         console.log("No orders found with the current search parameters.")
-        return;
-    };
+    } else {
+        (<HTMLDivElement>document.getElementById("buying-list")).innerHTML = "";
+        console.log(orders);
+        const table = document.createElement("table");
+        table.innerHTML = `<tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Seller</th>
+        </tr>`;
+        orders.forEach((order: any) => {
+            const orderID = document.createElement("td");
+            const itemName = document.createElement("td");
+            const itemAmount = document.createElement("td");
+            const itemPrice = document.createElement("td");
+            const sellerName = document.createElement("td");
+            const cancelButton = document.createElement("button");
+            const receiveButton = document.createElement("button");
+            const buttons = document.createElement("td");
+            
+            orderID.innerHTML = order.id;
+            itemName.innerHTML = order.item;
+            itemAmount.innerHTML = order.amount;
+            itemPrice.innerHTML = order.price;
+            sellerName.innerHTML = `<div>${order.retrommousername}</div><div>${order.discordname}</div>`;
+            cancelButton.onclick = () => cancelOrder(order.id);
+            cancelButton.innerText = "Cancel Order"
+            cancelButton.disabled = order.buyerdelivered || order.sellerdelivered;
+            receiveButton.onclick = () => receiveOrder(order.id);
+            receiveButton.innerText = "Mark as Received"
+            receiveButton.disabled = order.buyerdelivered;
+            buttons.append(cancelButton, receiveButton);
+            const tr = document.createElement("tr");
+            tr.append(orderID, itemName, itemAmount, itemPrice, sellerName, buttons);
+            table.append(tr);
+        });
+        const title = document.createElement("div");
+        title.innerHTML = "Buy orders:";
+        (<HTMLDivElement>document.getElementById("buying-list")).append(title, table);
+    }
+}
 
-    console.log(orders);
+async function renderOffers() {
+    const offers = await getSellOrders();
 
-    const fragment = document.createElement("div", { is: "order-card" });
-    (<HTMLDivElement>document.getElementById("orders-list")).innerHTML = "";
-    orders?.forEach((item: any) => {
-        const instance = document.importNode(fragment, true);
-        (<HTMLSpanElement>instance.querySelector("#item-name")).innerHTML = item.item;
-        (<HTMLSpanElement>instance.querySelector("#seller-name")).innerHTML = item.retrommousername;
-        (<HTMLSpanElement>instance.querySelector("#seller-status")).style.color = (item.sellerStatus === "online") ? "green" : "red";
-        (<HTMLInputElement>instance.querySelector("#item-count")).innerHTML = `${item.amount.toString()}x for `;
-        (<HTMLDivElement>instance.querySelector("#item-price")).innerHTML = `${item.price.toString()}g`;
-        (<HTMLButtonElement>instance.querySelector("#cancel-button")).value = item.id.toString();
-        (<HTMLButtonElement>instance.querySelector("#receive-button")).value = item.id.toString();
-        (<HTMLButtonElement>instance.querySelector("#receive-button")).disabled = item.buyerdelivered;
-        document.getElementById("orders-list")?.appendChild(instance);
-    })
+    if(offers === undefined || offers.length === 0) {
+        console.log("No orders found with the current search parameters.")
+    } else {
+        (<HTMLDivElement>document.getElementById("selling-list")).innerHTML = "";
+        console.log(offers);
+        const table = document.createElement("table");
+        table.innerHTML = `<tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Price</th>
+        </tr>`;
+        offers.forEach((offer: any) => {
+            const offerID = document.createElement("td");
+            const itemName = document.createElement("td");
+            const itemAmount = document.createElement("td");
+            const itemPrice = document.createElement("td");
+            const buyersButton = document.createElement("button");
+            const cancelButton = document.createElement("button");
+            
+            offerID.innerHTML = offer.id;
+            itemName.innerHTML = offer.item;
+            itemAmount.innerHTML = offer.amount;
+            itemPrice.innerHTML = offer.price;
+            
+            buyersButton.innerText = `Show ${offer.buyOrders.length} buyer(s)`;
+            buyersButton.disabled = offer.buyOrders.length === 0;
+            cancelButton.onclick = () => cancelOrder(offer.id);
+            cancelButton.innerText = "Remove Offer"
+            cancelButton.disabled = offer.sellerdelivered;
+
+            let tr = document.createElement("tr");
+            tr.append(offerID, itemName, itemAmount, itemPrice, buyersButton, cancelButton);
+            table.append(tr);
+
+            let buyOrderRows: HTMLTableRowElement[] = [];
+            offer.buyOrders.forEach((order: any) => {
+                const buyOrderID = document.createElement("td");
+                const buyerName = document.createElement("td");
+                const buyerAmount = document.createElement("td");
+                
+                buyOrderID.innerHTML = order.id;
+                buyerName.innerHTML = `<div>${order.retrommousername}</div><div>${order.discordname}</div>`;
+                buyerAmount.innerHTML = order.amount;
+                
+                const receiveButton = document.createElement("button");        
+                receiveButton.onclick = () => receiveOrder(order.id);
+                receiveButton.innerText = "Mark as Delivered"
+                receiveButton.disabled = order.sellerdelivered || order.buyerdelivered;
+                
+                tr = document.createElement("tr");
+                tr.style.display = "none";
+                tr.id = "hidden-row";
+                tr.append(buyOrderID, buyerName, buyerAmount, document.createElement("td"), receiveButton)
+                buyOrderRows.push(tr);
+                table.append(tr);
+            });
+            buyersButton.onclick = () => toggleBuyersList(buyOrderRows);
+        });
+        const title = document.createElement("div");
+        title.innerHTML = "Sell offers:";
+        (<HTMLDivElement>document.getElementById("selling-list")).append(title, table);
+    }
+}
+
+function toggleBuyersList(container: HTMLTableRowElement[]) {
+    if(container[0].style.display === "none") {
+        container.every((row: HTMLTableRowElement) => row.style.display = "table-row");
+    } else {
+        container.every((row: HTMLTableRowElement) => row.style.display = "none");
+    }
 }
 
 renderOrders();
+renderOffers();
 
 async function cancelOrder(id: string) {
     //parseInt(id);
@@ -89,5 +174,6 @@ async function receiveOrder(id: string) {
     console.log(res);
     if(!res.ok) throw new Error("error")
     renderOrders();
+    renderOffers();
 }
 
