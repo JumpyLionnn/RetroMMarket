@@ -28,7 +28,9 @@ function createTables(){
             price INTEGER,
             amount INTEGER,
             sellerId INTEGER REFERENCES users(id),
-            date bigint
+            date bigint,
+            done BOOLEAN DEFAULT false,
+            canceled BOOLEAN DEFAULT false
         );
 
         /* buyOrders
@@ -40,7 +42,9 @@ function createTables(){
             amount INTEGER,
             sellerDelivered BOOLEAN DEFAULT false,
             buyerDelivered BOOLEAN DEFAULT false,
-            date bigint
+            date bigint,
+            done BOOLEAN DEFAULT false,
+            canceled BOOLEAN DEFAULT false
         );
     `);
 }
