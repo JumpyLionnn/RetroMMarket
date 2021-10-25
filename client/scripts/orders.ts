@@ -1,3 +1,5 @@
+import { displayAlert } from "./alert.js"
+
 async function getBuyOrders() {
     const url = `/buyOrders`;
     const res = await fetch(url, {
@@ -13,7 +15,7 @@ async function getBuyOrders() {
     return await res.json();
 }
 
-async function getSellOrders() {
+async function getSellOffers() {
     const url = `/sellOffers`;
     const res = await fetch(url, {
         method: "GET",
@@ -31,19 +33,19 @@ async function getSellOrders() {
 async function renderOrders() {
     const orders = await getBuyOrders();
 
+    (<HTMLDivElement>document.getElementById("buying-list")).innerHTML = "";
+    const table = document.createElement("table");
+    
     if(orders === undefined || orders.length === 0) {
         console.log("No orders found with the current search parameters.")
     } else {
-        (<HTMLDivElement>document.getElementById("buying-list")).innerHTML = "";
-        console.log(orders);
-        const table = document.createElement("table");
         table.innerHTML = `<tr>
             <th>ID</th>
             <th>Item</th>
             <th>Amount</th>
             <th>Price</th>
             <th>Seller</th>
-        </tr>`;
+            </tr>`;
         orders.forEach((order: any) => {
             const orderID = document.createElement("td");
             const itemName = document.createElement("td");
@@ -70,27 +72,27 @@ async function renderOrders() {
             tr.append(orderID, itemName, itemAmount, itemPrice, sellerName, buttons);
             table.append(tr);
         });
-        const title = document.createElement("div");
-        title.innerHTML = "Buy orders:";
-        (<HTMLDivElement>document.getElementById("buying-list")).append(title, table);
+        
     }
+    const title = document.createElement("div");
+    title.innerHTML = "Buy orders:";
+    (<HTMLDivElement>document.getElementById("buying-list")).append(title, table);
 }
 
 async function renderOffers() {
-    const offers = await getSellOrders();
-
+    const offers = await getSellOffers();
+    (<HTMLDivElement>document.getElementById("selling-list")).innerHTML = "";
+    const table = document.createElement("table");
+   
     if(offers === undefined || offers.length === 0) {
-        console.log("No orders found with the current search parameters.")
+        console.log("No offers found with the current search parameters.")
     } else {
-        (<HTMLDivElement>document.getElementById("selling-list")).innerHTML = "";
-        console.log(offers);
-        const table = document.createElement("table");
         table.innerHTML = `<tr>
             <th>ID</th>
             <th>Item</th>
             <th>Amount</th>
             <th>Price</th>
-        </tr>`;
+            </tr>`;
         offers.forEach((offer: any) => {
             const offerID = document.createElement("td");
             const itemName = document.createElement("td");
@@ -136,19 +138,22 @@ async function renderOffers() {
                 buyOrderRows.push(tr);
                 table.append(tr);
             });
-            buyersButton.onclick = () => toggleBuyersList(buyOrderRows);
+            buyersButton.onclick = () => toggleBuyersList(buyOrderRows, buyersButton, offer.buyOrders.length);
         });
-        const title = document.createElement("div");
-        title.innerHTML = "Sell offers:";
-        (<HTMLDivElement>document.getElementById("selling-list")).append(title, table);
+        
     }
+    const title = document.createElement("div");
+    title.innerHTML = "Sell offers:";
+    (<HTMLDivElement>document.getElementById("selling-list")).append(title, table);
 }
 
-function toggleBuyersList(container: HTMLTableRowElement[]) {
+function toggleBuyersList(container: HTMLTableRowElement[], button: HTMLButtonElement, orders: number) {
     if(container[0].style.display === "none") {
         container.every((row: HTMLTableRowElement) => row.style.display = "table-row");
+        button.innerText = `Hide ${orders} buyer(s)`;
     } else {
         container.every((row: HTMLTableRowElement) => row.style.display = "none");
+        button.innerText = `Show ${orders} buyer(s)`;
     }
 }
 
@@ -156,37 +161,44 @@ renderOrders();
 renderOffers();
 
 async function cancelOrder(id: string) {
-    const url = `/cancelOrder`;
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            buyOrderId: parseInt(id),
-        })
+    displayAlert("Cancel Order", "Are you sure you want to cancel the order?", async (result: boolean) => {
+        if(result) {
+            const url = `/cancelOrder`;
+            console.log(id);
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    buyOrderId: parseInt(id),
+                })
+            });
+            console.log(res);
+            if(!res.ok) throw new Error("error");
+            renderOrders();
+        }
     });
-    console.log(res);
-    if(!res.ok) throw new Error("error");
-    renderOrders();
-    renderOffers();
 }
 
 async function cancelOffer(id: string) {
-    const url = `/cancelOffer`;
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            sellOfferId: parseInt(id),
-        })
-    });
-    console.log(res);
-    if(!res.ok) throw new Error("error");
-    renderOrders();
-    renderOffers();
+    displayAlert("Cancel Offer", "Are you sure you want to cancel the offer?", async (result: boolean) => {
+        if(result) {
+            const url = `/cancelOffer`;
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    sellOfferId: parseInt(id),
+                })
+            });
+            console.log(res);
+            if(!res.ok) throw new Error("error");
+            renderOffers();
+        }
+    }
 }
 
 async function receiveOrder(id: string) {

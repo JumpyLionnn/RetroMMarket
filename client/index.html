@@ -11,7 +11,7 @@
         <label for="consumables">Consumables</label><br>
         <input name="category" id="cosmetics" type="radio" value="Cosmetics" onclick="changeCategory(this.value);" autocomplete="off">
         <label for="cosmetics">Cosmetics</label><br>
-        <input name="category" id="weapons" type="radio" value="Weapons" onclick="changeCategory(this.value);" checked autocomplete="off">
+        <input name="category" id="weapons" type="radio" value="Weapons" onclick="changeCategory(this.value);" autocomplete="off">
         <label for="weapons">Weapons</label>
     </div>
     <hr>
@@ -37,6 +37,7 @@
             </optgroup>
         </select>
     </div>
-    <div id="items-list"></div>
+    <div id="items-list">
+    </div>
 </div>
 {% endblock %}

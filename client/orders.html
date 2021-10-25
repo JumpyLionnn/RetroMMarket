@@ -1,18 +1,16 @@
-{% extends "layout.html" %}
-{% block css %}
+{% extends "layout.html" %} {% block css %}
 <link rel="stylesheet" href="style/orders.css">
 <style>
     /* Magic to remove the sidebar to center the content */
+    
     #main-wrapper {
         grid-template-columns: 0fr 3fr;
     }
 </style>
-<script src="src/orders.js" type="text/javascript" defer></script>
-{% endblock %}
-{% block content %}
+<script src="src/orders.js" type="module" defer></script>
+{% endblock %} {% block content %}
 <div id="orders-wrapper">
     <div id="buying-list"></div>
     <div id="selling-list"></div>
 </div>
-{% endblock %} 
-
+{% endblock %}

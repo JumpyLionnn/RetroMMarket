@@ -100,6 +100,11 @@ items
     justify-content: center;
 }
 
+#item-list-message {
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
 #item-card {
     border: 1px solid black;
     width: 300px;
@@ -193,6 +198,11 @@ items
     border-radius: 5px;
     padding: 5px 0;
     border: 1px solid black;
+    cursor: pointer;
+}
+
+#buy-button:hover {
+    background-color: #44ca2c;
 }
 
 @media (min-width: 500px) {

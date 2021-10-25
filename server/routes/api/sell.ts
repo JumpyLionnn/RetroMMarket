@@ -30,5 +30,5 @@ async function sellRoute(req: ExpressRequest, res: ExpressResponse){
     }
 
     await addSellOffer(item, category, price, amount, req.user.id);
-    res.send("success");
+    res.redirect("/orders");
 }

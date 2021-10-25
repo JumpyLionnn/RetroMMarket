@@ -7,7 +7,7 @@ enum sortTypes {
 };
 let sortingOrder: sortTypes = sortTypes.ASC;
 let onlineSellersOnly: boolean = false;
-let currentCategory: string = "Weapons";
+let currentCategory: string = "";
 
 async function getExtraItemData() {
     const url = "/items";
@@ -63,11 +63,17 @@ class ItemCard extends HTMLDivElement {
 customElements.define("item-card", ItemCard, { extends: "div" });
 
 function displayErrorMessage(message: string) {
-    (<HTMLDivElement>document.getElementById("items-list")).innerHTML = message;
+    const itemsList = document.getElementById("items-list") as HTMLDivElement;
+    const errorLabel = document.createElement("span");
+    errorLabel.id = "item-list-message";
+    errorLabel.innerHTML = message;
+    errorLabel.style.display = "block";
+    itemsList.innerHTML = "";
+    itemsList.appendChild(errorLabel);
 }
 
 async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: sortTypes, upperLimit: number) {
-    const url = `/find?query=${query}&category=${category}&onlineSellersOnly=${onlineSellersOnly}&sort=${sortBy}&to=${upperLimit}`;
+    const url = `/find?query=${query}${category !== "" ? "&category=" + category : ""}&onlineSellersOnly=${onlineSellersOnly}&sort=${sortBy}&to=${upperLimit}`;
     const res = await fetch(url, {
         method: "GET",
         headers: {

@@ -14,9 +14,9 @@ async function cancelBuyOrderRoute(req: ExpressRequest, res: ExpressResponse){
     if(order.done){
         return res.status(400).send("this offer is already done.");
     }
-
-    client.query("UPDATE sellOffers SET amount = amount + $2 WHERE id = $1;", [order.sellofferid, order.amount]);
-    client.query("UPDATE buyOrders SET done = true, canceled = true WHERE id = $1;", [order.id]);
+    console.log(order.amount);
+    await client.query("UPDATE sellOffers SET amount = amount + $2 WHERE id = $1;", [order.sellofferid, order.amount]);
+    await client.query("UPDATE buyOrders SET done = true, canceled = true WHERE id = $1;", [buyOrderId]);
     res.send("success");
 
 }

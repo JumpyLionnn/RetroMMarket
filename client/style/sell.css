@@ -1,6 +1,7 @@
 #page-title {
     text-align: center;
     margin-bottom: 1em;
+    font-weight: normal;
 }
 
 #sell-form {
@@ -38,6 +39,7 @@
 #field-label {
     text-align: center;
     font-size: 1.8em;
+    font-weight: normal;
 }
 
 .field-input {
@@ -53,7 +55,7 @@
 
 #item-menu-element-card {
     position: absolute;
-    z-index: 10;
+    z-index: 5;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
