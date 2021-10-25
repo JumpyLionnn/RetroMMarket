@@ -10,6 +10,9 @@ async function buyRoute(req: ExpressRequest, res: ExpressResponse){
     if(sellOffer.sellerid === req.user.id){
         return res.status(400).send("You can not buy your own items.");
     }
+    if(sellOffer.done || sellOffer.canceled) {
+        return res.status(400).send("Item has been removed or bought by another user.")
+    }
 
     const amount = req.body.amount;
     if(typeof amount !== "number"){
