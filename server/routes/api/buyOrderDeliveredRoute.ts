@@ -9,19 +9,29 @@ async function buyOrderDeliveredRoute(req: ExpressRequest, res: ExpressResponse)
     }
     
     if(order.sellerid === req.user.id){
-        if(order.sellerdelivered === true){
+        if(order.sellerdelivered){
             return res.status(400).send("You already delivered this order.");
         }
         client.query("UPDATE buyOrders SET sellerDelivered = true WHERE id = $1", [orderId]);
     }
     else if(order.buyerid === req.user.id){
-        if(order.buyerdelivered === true){
+        if(order.buyerdelivered){
             return res.status(400).send("You already got this order.");
         }
-        client.query("UPDATE buyOrders SET buyerDelivered = true WHERE id = $1", [orderId]);
+        client.query("UPDATE buyOrders SET buyerDelivered = true WHERE id = $1;", [orderId]);
     }
     else{
         return res.status(400).send("You dont own this order.");
     }
+    if(order.sellerdelivered || order.buyerdelivered){
+        client.query(`UPDATE buyOrders SET done = true WHERE id = $1;`, [orderId]);
+        if((await client.query("SELECT amount FROM sellOffers WHERE id = $1", [order.sellOfferid])).rows[0].amount === 0){
+            const undoneBuyOrdersCount = (await client.query(`SELECT COUNT(*) FROM buyOrders WHERE done = false AND sellOfferId = $1`, [order.sellofferid])).rows[0].count;
+            if(undoneBuyOrdersCount === 0){
+                client.query("UPDATE sellOffers SET done = true WHERE id = $1;", [order.sellsellOfferid]);
+            }
+        }
+    }
+
     res.send("success");
 }

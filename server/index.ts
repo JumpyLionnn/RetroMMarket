@@ -74,6 +74,8 @@ app.post("/changeRetroMMOUsername", verifyAuth, changeRetroMMOUsernameRoute);
 
 app.post("/sell", verifyAuth, sellRoute);
 app.post("/buy", verifyAuth, buyRoute);
+app.post("/cancelOffer", verifyAuth, cancelSellOfferRoute);
+app.post("/cancelOrder", verifyAuth, cancelBuyOrderRoute);
 app.get("/find", verifyAuth, findSellOfferRoute);
 app.post("/buyOrderDelivered", verifyAuth, buyOrderDeliveredRoute);
 
