@@ -61,10 +61,10 @@ async function renderOrders() {
             sellerName.innerHTML = `<div>${order.retrommousername}</div><div>${order.discordname}</div>`;
             cancelButton.onclick = () => cancelOrder(order.id);
             cancelButton.innerText = "Cancel Order"
-            cancelButton.disabled = order.buyerdelivered || order.sellerdelivered;
+            cancelButton.disabled = order.buyerdelivered || order.sellerdelivered || order.done || order.canceled;
             receiveButton.onclick = () => receiveOrder(order.id);
             receiveButton.innerText = "Mark as Received"
-            receiveButton.disabled = order.buyerdelivered;
+            receiveButton.disabled = order.buyerdelivered || order.done || order.canceled;
             buttons.append(cancelButton, receiveButton);
             const tr = document.createElement("tr");
             tr.append(orderID, itemName, itemAmount, itemPrice, sellerName, buttons);
@@ -106,9 +106,9 @@ async function renderOffers() {
             
             buyersButton.innerText = `Show ${offer.buyOrders.length} buyer(s)`;
             buyersButton.disabled = offer.buyOrders.length === 0;
-            cancelButton.onclick = () => cancelOrder(offer.id);
+            cancelButton.onclick = () => cancelOffer(offer.id);
             cancelButton.innerText = "Remove Offer"
-            cancelButton.disabled = offer.sellerdelivered;
+            cancelButton.disabled = offer.done;
 
             let tr = document.createElement("tr");
             tr.append(offerID, itemName, itemAmount, itemPrice, buyersButton, cancelButton);
@@ -156,8 +156,37 @@ renderOrders();
 renderOffers();
 
 async function cancelOrder(id: string) {
-    //parseInt(id);
-    console.log("Order canceled for item ", id)
+    const url = `/cancelOrder`;
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            buyOrderId: parseInt(id),
+        })
+    });
+    console.log(res);
+    if(!res.ok) throw new Error("error");
+    renderOrders();
+    renderOffers();
+}
+
+async function cancelOffer(id: string) {
+    const url = `/cancelOffer`;
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            sellOfferId: parseInt(id),
+        })
+    });
+    console.log(res);
+    if(!res.ok) throw new Error("error");
+    renderOrders();
+    renderOffers();
 }
 
 async function receiveOrder(id: string) {
