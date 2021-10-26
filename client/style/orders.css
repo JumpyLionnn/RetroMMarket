@@ -10,7 +10,7 @@
     font-size: 2em;
 }
 
-button {
+tr button {
     transform: translateY(25%);
 }
 
@@ -24,10 +24,6 @@ button {
 
 #hidden-row {
     background: #eee;
-}
-
-th {
-    text-align: left;
 }
 
 td,
