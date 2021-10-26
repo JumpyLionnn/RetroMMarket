@@ -195,19 +195,21 @@ async function cancelOffer(id: string) {
 }
 
 async function receiveOrder(id: string) {
-    const url = `/buyOrderDelivered`;
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            orderId: parseInt(id),
-        })
+    displayAlert("deliver", "Are you sure you want to mark this order as delivered?", async (result: boolean) => {
+        if(result){
+            const url = `/buyOrderDelivered`;
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    orderId: parseInt(id),
+                })
+            });
+            if(!res.ok) throw new Error("error");
+            renderOffers();
+        }
     });
-    console.log(res);
-    if(!res.ok) throw new Error("error")
-    renderOrders();
-    renderOffers();
 }
 
