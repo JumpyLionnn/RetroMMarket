@@ -5,6 +5,8 @@
 <div id="sidebar-content">
     <div id="sidebar-subtitle">Item Type:</div>
     <div id="item-categories">
+        <input name="category" id="all" type="radio" value="All" onclick="changeCategory('');" autocomplete="off" checked>
+        <label for="all">All</label><br>
         <input name="category" id="armors" type="radio" value="Armors" onclick="changeCategory(this.value);" autocomplete="off">
         <label for="armors">Armors</label><br>
         <input name="category" id="consumables" type="radio" value="Consumables" onclick="changeCategory(this.value);" autocomplete="off">
