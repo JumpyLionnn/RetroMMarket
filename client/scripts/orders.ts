@@ -40,14 +40,12 @@ async function renderOrders() {
         console.log("No orders found with the current search parameters.")
     } else {
         table.innerHTML = `<tr>
-            <th>ID</th>
             <th>Item</th>
             <th>Amount</th>
             <th>Price</th>
             <th>Seller</th>
             </tr>`;
         orders.forEach((order: any) => {
-            const orderID = document.createElement("td");
             const itemName = document.createElement("td");
             const itemAmount = document.createElement("td");
             const itemPrice = document.createElement("td");
@@ -56,7 +54,6 @@ async function renderOrders() {
             const receiveButton = document.createElement("button");
             const buttons = document.createElement("td");
             
-            orderID.innerHTML = order.id;
             itemName.innerHTML = order.item;
             itemAmount.innerHTML = order.amount;
             itemPrice.innerHTML = order.price;
@@ -69,7 +66,7 @@ async function renderOrders() {
             receiveButton.disabled = order.buyerdelivered || order.done || order.canceled;
             buttons.append(cancelButton, receiveButton);
             const tr = document.createElement("tr");
-            tr.append(orderID, itemName, itemAmount, itemPrice, sellerName, buttons);
+            tr.append(itemName, itemAmount, itemPrice, sellerName, buttons);
             table.append(tr);
         });
         
@@ -88,20 +85,17 @@ async function renderOffers() {
         console.log("No offers found with the current search parameters.")
     } else {
         table.innerHTML = `<tr>
-            <th>ID</th>
             <th>Item</th>
             <th>Amount</th>
             <th>Price</th>
             </tr>`;
         offers.forEach((offer: any) => {
-            const offerID = document.createElement("td");
             const itemName = document.createElement("td");
             const itemAmount = document.createElement("td");
             const itemPrice = document.createElement("td");
             const buyersButton = document.createElement("button");
             const cancelButton = document.createElement("button");
             
-            offerID.innerHTML = offer.id;
             itemName.innerHTML = offer.item;
             itemAmount.innerHTML = offer.amount;
             itemPrice.innerHTML = offer.price;
@@ -113,7 +107,7 @@ async function renderOffers() {
             cancelButton.disabled = offer.done;
 
             let tr = document.createElement("tr");
-            tr.append(offerID, itemName, itemAmount, itemPrice, buyersButton, cancelButton);
+            tr.append(itemName, itemAmount, itemPrice, buyersButton, cancelButton);
             table.append(tr);
 
             let buyOrderRows: HTMLTableRowElement[] = [];
