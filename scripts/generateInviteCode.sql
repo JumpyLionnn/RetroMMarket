@@ -9,4 +9,4 @@ loop
 end loop;
 end;
 $do$;
-SELECT token FROM invitationTokens;
+SELECT token FROM invitationTokens WHERE used = false;
