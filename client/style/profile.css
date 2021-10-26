@@ -26,6 +26,7 @@ label {}
     image-rendering: pixelated;
     background-origin: content-box;
     padding: .2em;
+    cursor: pointer;
 }
 
 @media (max-width: 700px) {
