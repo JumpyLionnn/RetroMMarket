@@ -25,9 +25,11 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
         dbQuery += ` AND category = '${categoryFilter}'`;
     }
 
+    const onlineUsers = await getUsersIdIfOnline();
+
     const onlineSellersOnlyString = req.query.onlineSellersOnly;
     if(onlineSellersOnlyString === "true"){
-        const onlineUsers = await getUsersIdIfOnline();
+        
         if(onlineUsers.length === 0){
             return res.status(400).send("There are no sell offers available from online users.");
         }
@@ -73,5 +75,14 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
             return res.status(400).send("the page must be a positive number");
         }
     }
-    res.send((await client.query(dbQuery)).rows);
+    const rows = (await client.query(dbQuery)).rows;
+    rows.forEach((row: any) =>{
+        if(onlineUsers.filter((user: any) => user.id === row.sellerid).length > 0){
+            row.sellerStatus = "online";
+        }
+        else{
+            row.sellerStatus = "offline";
+        }
+    });
+    res.send(rows);
 }
