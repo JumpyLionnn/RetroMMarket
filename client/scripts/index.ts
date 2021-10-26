@@ -10,6 +10,16 @@ enum sortTypes {
 let sortingOrder: sortTypes = sortTypes.ASC;
 let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
+let upperLimit: number = 10;
+
+window.onscroll = async function(ev) {
+    if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
+        upperLimit += 10;
+        items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+        renderItems(items);
+        if(items.length > upperLimit) upperLimit = items.length;
+    }
+}
 
 const allCategoryInput = document.querySelector("input#all") as HTMLInputElement;
 allCategoryInput.addEventListener("click", (e) => changeCategory(""));
@@ -171,20 +181,21 @@ function searchItem(query: string) {
 }
 
 async function changeCategory(category:string) {
+    upperLimit = 10;
     currentCategory = category;
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
 async function toggleOnlineSellersOnly() {
     onlineSellersOnly = !onlineSellersOnly;
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
 async function firstRender() {
     itemsExtraData = await getExtraItemData();
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
@@ -210,7 +221,7 @@ async function buyItem(e: HTMLButtonElement) {
     });
     if(!res.ok) throw new Error(await res.text())
 
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, 10);
+    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, upperLimit);
     renderItems(items);
     displayAlert("", "Do you want to view your orders?", (result: boolean) => {
         if(result) {
