@@ -104,7 +104,6 @@ async function renderOffers() {
             buyersButton.disabled = offer.buyOrders.length === 0;
             cancelButton.onclick = () => cancelOffer(offer.id);
             cancelButton.innerText = "Remove Offer"
-            cancelButton.disabled = offer.done;
 
             let tr = document.createElement("tr");
             tr.append(itemName, itemAmount, itemPrice, buyersButton, cancelButton);
@@ -123,7 +122,7 @@ async function renderOffers() {
                 const receiveButton = document.createElement("button");        
                 receiveButton.onclick = () => receiveOrder(order.id);
                 receiveButton.innerText = "Mark as Delivered"
-                receiveButton.disabled = order.sellerdelivered || order.buyerdelivered;
+                receiveButton.disabled = order.sellerdelivered;
                 
                 tr = document.createElement("tr");
                 tr.style.display = "none";
