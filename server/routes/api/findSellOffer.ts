@@ -53,7 +53,10 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
         return res.status(400).send("sort can only be ASC or DESC.");
     }
 
-    dbQuery += ` LIMIT ${pageSize}`;
+    if(req.query.to)
+        dbQuery += ` LIMIT ${req.query.to}`;
+    else
+        dbQuery += ` LIMIT ${pageSize}`;
 
     const page = req.query.page;
     const isNumber = isNumeric(page);
