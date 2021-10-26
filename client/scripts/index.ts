@@ -1,3 +1,5 @@
+import { displayAlert } from "./alert.js";
+
 let items: any;
 let itemsExtraData: any;
 
@@ -8,6 +10,30 @@ enum sortTypes {
 let sortingOrder: sortTypes = sortTypes.ASC;
 let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
+
+const allCategoryInput = document.querySelector("input#all") as HTMLInputElement;
+allCategoryInput.addEventListener("click", (e) => changeCategory(""));
+
+const armorsCategoryInput = document.querySelector("input#armors") as HTMLInputElement;
+armorsCategoryInput.addEventListener("click", (e) => changeCategory(armorsCategoryInput.value));
+
+const consumablesCategoryInput = document.querySelector("input#consumables") as HTMLInputElement;
+consumablesCategoryInput.addEventListener("click", (e) => changeCategory(consumablesCategoryInput.value));
+
+const cosmeticsCategoryInput = document.querySelector("input#cosmetics") as HTMLInputElement;
+cosmeticsCategoryInput.addEventListener("click", (e) => changeCategory(cosmeticsCategoryInput.value));
+
+const weaponsCategoryInput = document.querySelector("input#weapons") as HTMLInputElement;
+weaponsCategoryInput.addEventListener("click", (e) => changeCategory(weaponsCategoryInput.value));
+
+const toggleOnlineSellersOnlyInput = document.getElementById("toggleOnlineSellersOnly") as HTMLInputElement;
+toggleOnlineSellersOnlyInput.addEventListener("click", (e) => toggleOnlineSellersOnly());
+
+const searchInput = document.getElementById("search-input") as HTMLInputElement;
+searchInput.addEventListener("change", (e) => searchItem(searchInput.value));
+
+const orderSelector = document.getElementById("order-selector") as HTMLSelectElement;
+orderSelector.addEventListener("change", (e) => changeSortingOrder(orderSelector.value));
 
 async function getExtraItemData() {
     const url = "/items";
@@ -53,7 +79,7 @@ class ItemCard extends HTMLDivElement {
                 <div id="price-number"></div>
             </div>
             <div id="buy-button-container">
-                <button id="buy-button" value="" onclick="buyItem(this)">BUY NOW</button>
+                <button id="buy-button" value="">BUY NOW</button>
             </div>
         </div>
         `;
@@ -119,7 +145,9 @@ function renderItems(items: any[]) {
         (<HTMLSpanElement>instance.querySelector("#seller-status")).style.color = (item.sellerStatus === "online") ? "green" : "red";
         (<HTMLInputElement>instance.querySelector("#item-count-number-input")).max = item.amount.toString();
         (<HTMLDivElement>instance.querySelector("#price-number")).innerHTML = `${item.price.toString()}g`;
-        (<HTMLButtonElement>instance.querySelector("#buy-button")).value = item.id.toString();
+        const button = <HTMLButtonElement>instance.querySelector("#buy-button");
+        button.value = item.id.toString();
+        button.addEventListener("click", () => { buyItem(button); })
 
         document.getElementById("items-list")?.appendChild(instance);
     })
@@ -184,4 +212,9 @@ async function buyItem(e: HTMLButtonElement) {
 
     items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, 10);
     renderItems(items);
+    displayAlert("", "Do you want to view your orders?", (result: boolean) => {
+        if(result) {
+            window.location.replace("/orders");
+        }
+    });
 }

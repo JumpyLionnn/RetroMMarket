@@ -1,23 +1,23 @@
 {% extends "layout.html" %} {% block css %}
 <link rel="stylesheet" href="style/index.css">
-<script src="src/index.js" type="text/javascript" defer></script>
+<script src="src/index.js" type="module" defer></script>
 {% endblock %} {% block sidebar %}
 <div id="sidebar-content">
     <div id="sidebar-subtitle">Item Type:</div>
     <div id="item-categories">
-        <input name="category" id="all" type="radio" value="All" onclick="changeCategory('');" autocomplete="off" checked>
+        <input name="category" id="all" type="radio" value="All" autocomplete="off" checked>
         <label for="all">All</label><br>
-        <input name="category" id="armors" type="radio" value="Armors" onclick="changeCategory(this.value);" autocomplete="off">
+        <input name="category" id="armors" type="radio" value="Armors" autocomplete="off">
         <label for="armors">Armors</label><br>
-        <input name="category" id="consumables" type="radio" value="Consumables" onclick="changeCategory(this.value);" autocomplete="off">
+        <input name="category" id="consumables" type="radio" value="Consumables" autocomplete="off">
         <label for="consumables">Consumables</label><br>
-        <input name="category" id="cosmetics" type="radio" value="Cosmetics" onclick="changeCategory(this.value);" autocomplete="off">
+        <input name="category" id="cosmetics" type="radio" value="Cosmetics" autocomplete="off">
         <label for="cosmetics">Cosmetics</label><br>
-        <input name="category" id="weapons" type="radio" value="Weapons" onclick="changeCategory(this.value);" autocomplete="off">
+        <input name="category" id="weapons" type="radio" value="Weapons" autocomplete="off">
         <label for="weapons">Weapons</label>
     </div>
     <hr>
-    <input type="checkbox" onclick="toggleOnlineSellersOnly();" id="toggleOnlineSellersOnly" autocomplete="off">
+    <input type="checkbox" id="toggleOnlineSellersOnly" autocomplete="off">
     <label for="toggleOnlineSellersOnly">Online Sellers Only</label>
     <hr>
 </div>
@@ -25,10 +25,10 @@
 <div id="item-browser">
     <div id="menu-container">
         <div id="menu-search-bar">
-            <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off" onchange="searchItem(this.value)">
+            <input type="search" name="search" id="search-input" placeholder="Search..." autocomplete="off">
             <div id="search-button-container"><button id="submit-search-button"><img src="assets/searchButton.png" alt=""></button></div>
         </div>
-        <select id="order-selector" onchange="changeSortingOrder(this.value)" autocomplete="off">
+        <select id="order-selector" autocomplete="off">
             <optgroup label="Price">
                 <option>Low to High</option>
                 <option>High to Low</option>
