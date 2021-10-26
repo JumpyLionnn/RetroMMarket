@@ -128,7 +128,7 @@ async function renderOffers() {
                 tr = document.createElement("tr");
                 tr.style.display = "none";
                 tr.id = "hidden-row";
-                tr.append(buyOrderID, buyerName, buyerAmount, document.createElement("td"), receiveButton)
+                tr.append(buyOrderID, buyerName, buyerAmount, receiveButton)
                 buyOrderRows.push(tr);
                 table.append(tr);
             });
@@ -192,7 +192,7 @@ async function cancelOffer(id: string) {
             if(!res.ok) throw new Error("error");
             renderOffers();
         }
-    }
+    });
 }
 
 async function receiveOrder(id: string) {
