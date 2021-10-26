@@ -125,6 +125,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 2em;
 }
 
 #alert-close-button {
@@ -143,7 +144,7 @@ img {
 
 #alert-message {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 #alert-buttons {
