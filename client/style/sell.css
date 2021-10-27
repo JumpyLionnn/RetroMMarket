@@ -46,11 +46,17 @@
     font-size: 1.5em;
 }
 
+#error-message {
+    grid-column: span 2;
+    color: red;
+    font-size: 1.5em;
+    margin-top: 2em;
+}
+
 #submit-sell-offer-button {
     grid-column: span 2;
     font-size: 3em;
     padding: .1em 1em;
-    margin-top: 2em;
 }
 
 #item-menu-element-card {

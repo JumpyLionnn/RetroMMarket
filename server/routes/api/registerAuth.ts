@@ -60,7 +60,7 @@ async function registerRoute(req: ExpressRequest, res: ExpressResponse){
     if(await checkUserEmail(email)){
         return registerPageRoute(req, res, {errorMessage: "email already exists."});
     }
-    if(await checkUserRetroMMOUsername(RetroMMOUsername)){
+    if(await checkUserRetroMMOUsername(RetroMMOUsername, -1)){
         return registerPageRoute(req, res, {errorMessage: "RetroMMO username already exists."});
     }
     // check if the invitation code is valid

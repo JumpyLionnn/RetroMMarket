@@ -59,7 +59,7 @@ app.use("/src", express.static(path.join(cwd ,"client/build")));
 
 app.get("/", verifyAuth, homePageRoute);
 app.get("/orders", verifyAuth, ordersPageRoute);
-app.get("/sell", verifyAuth, sellPageRoute);
+app.get("/sell", verifyAuth, (req: ExpressRequest, res: ExpressResponse) => sellPageRoute(req, res, ""));
 app.get("/profile", verifyAuth, profilePageRoute);
 app.get("/register", checkAuth, (req: ExpressRequest, res: ExpressResponse) => registerPageRoute(req, res, {}));
 app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
