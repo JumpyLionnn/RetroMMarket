@@ -6,7 +6,7 @@ async function changeRetroMMOUsernameRoute(req: ExpressRequest, res: ExpressResp
     if(RetroMMOUsername.length > 255){
         return res.status(400).send("the RetroMMO username is invalid");
     }
-    if(await checkUserRetroMMOUsername(RetroMMOUsername)){
+    if(await checkUserRetroMMOUsername(RetroMMOUsername, req.user.id)){
         return res.status(400).send("The RetroMMO username already exists.");
     }
     await changeRetroMMOUsername(RetroMMOUsername, req.user.id);
