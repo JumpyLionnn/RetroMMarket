@@ -1,4 +1,4 @@
-import { displayAlert } from "./alert.js"
+import { dialog } from "./alert.js"
 
 async function getBuyOrders() {
     const url = `/buyOrders`;
@@ -154,7 +154,7 @@ renderOrders();
 renderOffers();
 
 async function cancelOrder(id: string) {
-    displayAlert("Cancel Order", "Are you sure you want to cancel the order?", async (result: boolean) => {
+    dialog("Cancel Order", "Are you sure you want to cancel the order?", async (result: boolean) => {
         if(result) {
             const url = `/cancelOrder`;
             console.log(id);
@@ -175,7 +175,7 @@ async function cancelOrder(id: string) {
 }
 
 async function cancelOffer(id: string) {
-    displayAlert("Cancel Offer", "Are you sure you want to cancel the offer?", async (result: boolean) => {
+    dialog("Cancel Offer", "Are you sure you want to cancel the offer?", async (result: boolean) => {
         if(result) {
             const url = `/cancelOffer`;
             const res = await fetch(url, {
@@ -195,7 +195,7 @@ async function cancelOffer(id: string) {
 }
 
 async function receiveOrder(id: string) {
-    displayAlert("deliver", "Are you sure you want to mark this order as delivered?", async (result: boolean) => {
+    dialog("deliver", "Are you sure you want to mark this order as delivered?", async (result: boolean) => {
         if(result){
             const url = `/buyOrderDelivered`;
             const res = await fetch(url, {

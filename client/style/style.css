@@ -159,6 +159,15 @@ img {
     cursor: pointer;
 }
 
+#ok-button {
+    font-size: 2em;
+    padding: .2em .8em;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
+
 @media (max-width: 900px) {
     #main-wrapper {
         grid-template-columns: none !important;

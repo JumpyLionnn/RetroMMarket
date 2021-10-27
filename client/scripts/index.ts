@@ -1,4 +1,4 @@
-import { displayAlert } from "./alert.js";
+import { dialog, alert } from "./alert.js";
 
 let items: any;
 let itemsExtraData: any;
@@ -12,7 +12,7 @@ let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
 let upperLimit: number = 10;
 
-window.onscroll = async function(ev) {
+window.onscroll = async function() {
     if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
         upperLimit += 10;
         items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
@@ -219,11 +219,14 @@ async function buyItem(e: HTMLButtonElement) {
             amount: amount
         })
     });
-    if(!res.ok) throw new Error(await res.text())
+    if(!res.ok){
+        alert("error", await res.text(), () => {});
+        return;
+    }
 
     items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, upperLimit);
     renderItems(items);
-    displayAlert("", "Do you want to view your orders?", (result: boolean) => {
+    dialog("", "Do you want to view your orders?", (result: boolean) => {
         if(result) {
             window.location.replace("/orders");
         }

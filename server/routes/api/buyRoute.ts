@@ -24,7 +24,7 @@ async function buyRoute(req: ExpressRequest, res: ExpressResponse){
     if(amount > sellOffer.amount){
         return res.status(400).send("the amount is not valid.");
     }
-    if(await countUsersBuyOrders(req.user.id) > buyOrdersLimit){
+    if(await countUsersBuyOrders(req.user.id) >= buyOrdersLimit){
         return res.status(400).send(`you already reached the buy order limit.(${buyOrdersLimit})`);
     }
 
