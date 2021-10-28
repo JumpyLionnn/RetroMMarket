@@ -67,6 +67,13 @@ function getItemImage(query: string) {
     return "";
 }
 
+function getItemWikiLink(query: string) {
+    const item = itemsExtraData[query];
+    if(item !== undefined)
+        return item.wiki;
+    return "";
+}
+
 class ItemCard extends HTMLDivElement {
     constructor() {
         super();
@@ -74,7 +81,10 @@ class ItemCard extends HTMLDivElement {
         <div id="item-card">
             <div id="item-preview">
                 <img id="item-image" src="" alt="">
-                <span id="item-name"></span>
+                <a id="item-name-link" target="_blank">
+                    <span id="item-name"></span>
+                    <img id="external-link-image" src="assets/externalLink.png" alt="">
+                </a>
                 <span id="category-name"></span>
             </div>
             <div id="seller-details">
@@ -149,7 +159,8 @@ function renderItems(items: any[]) {
     items?.forEach((item: any) => {
         const instance = document.importNode(fragment, true);
         (<HTMLImageElement>instance.querySelector("#item-image")).src = `assets/${getItemImage(item.item)}`;
-        (<HTMLSpanElement>instance.querySelector("#item-name")).innerHTML = item.item;
+        (<HTMLAnchorElement>instance.querySelector("#item-name")).innerHTML = item.item;
+        (<HTMLAnchorElement>instance.querySelector("#item-name-link")).href = getItemWikiLink(item.item);
         (<HTMLSpanElement>instance.querySelector("#category-name")).innerHTML = item.category;
         (<HTMLSpanElement>instance.querySelector("#seller-name")).innerHTML = item.retrommousername;
         (<HTMLSpanElement>instance.querySelector("#seller-status")).style.color = (item.sellerStatus === "online") ? "green" : "red";
