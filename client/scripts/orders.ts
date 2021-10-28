@@ -33,8 +33,8 @@ async function getSellOffers() {
 async function renderOrders() {
     const orders = await getBuyOrders();
 
-    (<HTMLDivElement>document.getElementById("buying-list")).innerHTML = "";
-    const table = document.createElement("table");
+    const table = document.querySelector("#buying-list table") as HTMLTableElement;
+    table.innerHTML = "";
     
     if(orders === undefined || orders.length === 0) {
         console.log("No orders found with the current search parameters.")
@@ -71,15 +71,13 @@ async function renderOrders() {
         });
         
     }
-    const title = document.createElement("div");
-    title.innerHTML = "Buy orders:";
-    (<HTMLDivElement>document.getElementById("buying-list")).append(title, table);
 }
 
 async function renderOffers() {
     const offers = await getSellOffers();
-    (<HTMLDivElement>document.getElementById("selling-list")).innerHTML = "";
-    const table = document.createElement("table");
+
+    const table = document.querySelector("#selling-list table") as HTMLTableElement;
+    table.innerHTML = "";
    
     if(offers === undefined || offers.length === 0) {
         console.log("No offers found with the current search parameters.")
@@ -135,9 +133,6 @@ async function renderOffers() {
         });
         
     }
-    const title = document.createElement("div");
-    title.innerHTML = "Sell offers:";
-    (<HTMLDivElement>document.getElementById("selling-list")).append(title, table);
 }
 
 function toggleBuyersList(container: HTMLTableRowElement[], button: HTMLButtonElement, orders: number) {

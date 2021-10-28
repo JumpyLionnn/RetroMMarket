@@ -10,7 +10,13 @@
 <script src="src/orders.js" type="module" defer></script>
 {% endblock %} {% block content %}
 <div id="orders-wrapper">
-    <div id="buying-list"></div>
-    <div id="selling-list"></div>
+    <div id="buying-list">
+        <div>Buy orders ({{ ordersAmount }}/{{ orderLimit }}):</div>
+        <table></table>
+    </div>
+    <div id="selling-list">
+        <div>Sell offers ({{ offersAmount }}/{{ offerLimit }}):</div>
+        <table></table>
+    </div>
 </div>
 {% endblock %}
