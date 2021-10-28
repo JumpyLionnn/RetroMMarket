@@ -34,6 +34,9 @@
 
 #field {
     margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #field-label {
@@ -44,6 +47,7 @@
 
 .field-input {
     font-size: 1.5em;
+    width: fit-content;
 }
 
 #error-message {
