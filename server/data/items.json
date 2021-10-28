@@ -19,15 +19,60 @@
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Birthday_Hat_3"
     },
+    "Black Agility Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Agility_Boost"
+    },
+    "Black Defense Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Defense_Boost"
+    },
+    "Black Dye": {
+        "image": "items/Black_Clothes_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Dye"
+    },
+    "Black Intelligence Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Intelligence_Boost"
+    },
+    "Black Luck Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Luck_Boost"
+    },
+    "Black Strength Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Strength_Boost"
+    },
+    "Black Wisdom Boost": {
+        "image": "items/Black_Boost.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Wisdom_Boost"
+    },
+    "Blue Candy": {
+        "image": "items/Blue_Candy.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Blue_Candy"
+    },
     "Bone Bracelet": {
         "image": "items/Bone_Bracelet.png",
-        "category": "unknown",
+        "category": "Armors",
         "wiki": "https://wiki.retro-mmo.com/wiki/Bone_Bracelet"
+    },
+    "Cat Mask": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Classic_Dye"
     },
     "Chocolate Cake": {
         "image": "items/Chocolate_Cake.png",
         "category": "Consumables",
-        "wiki": "https://wiki.retro-mmo.com/wiki/Chocolate_Cake"
+        "wiki": "https://wiki.retro-mmo.com/wiki/Cat_Mask"
     },
     "Classic Dye": {
         "image": "items/Classic_Dye.png",
@@ -49,10 +94,35 @@
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Devil_Horns"
     },
+    "Dimitri's Cloak": {
+        "image": "items/Dimitris_Cloak.png",
+        "category": "Armors",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dimitri%27s_Cloak"
+    },
+    "Dimitri's Hood": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dimitri%27s_Hood"
+    },
+    "Dimitri's Scythe": {
+        "image": "items/Dimitris_Scythe.png",
+        "category": "Weapons",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dimitri%27s_Scythe"
+    },
+    "Dimitri's Tooth": {
+        "image": "items/Dimitris_Tooth.png",
+        "category": "Weapons",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dimitri%27s_Tooth"
+    },
     "Goblin Dye": {
         "image": "items/Goblin_Clothes_Dye.png",
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Goblin_Dye"
+    },
+    "Health Potion": {
+        "image": "items/Health_Potion.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Health_Potion"
     },
     "Intelligence Boost": {
         "image": "items/Intelligence_Boost.png",
@@ -79,6 +149,21 @@
         "category": "Armors",
         "wiki": "https://wiki.retro-mmo.com/wiki/Mage_Hat"
     },
+    "Mana Potion": {
+        "image": "items/Mana_Potion.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Mana_Potion"
+    },
+    "Messy Hair": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Messy_Hair"
+    },
+    "Mushroom Hat": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Mushroom_Hat"
+    },
     "Padded Garb": {
         "image": "items/Padded_Garb.png",
         "category": "Armors",
@@ -98,6 +183,16 @@
         "image": "items/Mask.png",
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Princess_Crown"
+    },
+    "Pumpkin Dye": {
+        "image": "items/Pumpkin_Clothes_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Pumpkin_Dye"
+    },
+    "Red Candy": {
+        "image": "items/Red_Candy.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Red_Candy"
     },
     "Rockstar Hair": {
         "image": "items/Mask.png",
@@ -129,10 +224,20 @@
         "category": "Armors",
         "wiki": "https://wiki.retro-mmo.com/wiki/Tattered_Cloak"
     },
+    "Teleport Scroll": {
+        "image": "items/Teleport_Scroll.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Teleport_Scroll"
+    },
     "The Tenderizer": {
         "image": "items/Charged_Pound.png",
         "category": "Weapons",
         "wiki": "https://wiki.retro-mmo.com/wiki/The_Tenderizer"
+    },
+    "Toxic Hair Dye": {
+        "image": "items/Toxic_Hair_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Toxic_Hair_Dye"
     },
     "Vanilla Cake": {
         "image": "items/Vanilla_Cake.png",
