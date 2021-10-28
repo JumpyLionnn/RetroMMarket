@@ -23,6 +23,14 @@ const categories = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/catego
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+if(process.env.NODE_ENV === 'production') {
+    app.use((req: ExpressRequest, res: ExpressResponse, next: () => void) => {
+      if (req.header("x-forwarded-proto") !== "https")
+        res.redirect(`https://${req.header("host")}${req.url}`);
+      else
+        next();
+    })
+  }
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
