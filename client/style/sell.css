@@ -161,3 +161,9 @@
 #item-option-card-name {
     margin-left: .5em;
 }
+
+@media (max-width: 700px) {
+    #item-menu-element-card {
+        width: 100%;
+    }
+}
