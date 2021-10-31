@@ -67,12 +67,12 @@
     "Cat Mask": {
         "image": "items/Mask.png",
         "category": "Cosmetics",
-        "wiki": "https://wiki.retro-mmo.com/wiki/Classic_Dye"
+        "wiki": "https://wiki.retro-mmo.com/wiki/Cat_Mask"
     },
     "Chocolate Cake": {
         "image": "items/Chocolate_Cake.png",
         "category": "Consumables",
-        "wiki": "https://wiki.retro-mmo.com/wiki/Cat_Mask"
+        "wiki": "https://wiki.retro-mmo.com/wiki/Chocolate_Cake"
     },
     "Classic Dye": {
         "image": "items/Classic_Dye.png",
