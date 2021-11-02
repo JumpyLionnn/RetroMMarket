@@ -47,5 +47,12 @@ function createTables(){
             done BOOLEAN DEFAULT false,
             canceled BOOLEAN DEFAULT false
         );
+
+        /* active reset password invitationTokens
+        ******************************************/
+       CREATE TABLE IF NOT EXISTS activeResetPasswordTokens(
+           token VARCHAR(1024),
+           date bigint
+       );
     `);
 }

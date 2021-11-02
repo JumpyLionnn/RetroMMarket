@@ -1,7 +1,7 @@
 async function sendEmailVerification(userId: number, host: string){
     const user = await getUserById(userId);
     if(user.emailverified){
-        return {success: false, message: "This email has been verified"};
+        return;
     }
 
     const token = jwt.sign({

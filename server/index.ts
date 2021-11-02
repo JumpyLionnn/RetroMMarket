@@ -61,6 +61,8 @@ client.on("connect", (error: Error, response: Response) => {
     createTables();
 });
 
+setInterval(cleanUpDatabase, 1000 * 60 * 60);
+
 
 // setting up the http routes
 app.use("/style", express.static(path.join(cwd ,"client/style")));
@@ -96,6 +98,12 @@ app.get("/items", verifyAuth, getItemsRoute);
 
 app.get("/verify/email", verifyEmail);
 app.get("/resendVerificationEmail", resendVerificationEmail);
+
+app.get("/forgotpassword", forgotPasswordPageRoute);
+app.post("/forgotpassword", forgotPasswordRoute);
+
+app.get("/resetpassword", (req: ExpressRequest, res: ExpressResponse) => resetPasswordPageRoute(req, res, {}));
+app.post("/resetpassword", resetPasswordRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");
