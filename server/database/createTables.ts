@@ -8,6 +8,7 @@ function createTables(){
             discordName VARCHAR(255),
             email VARCHAR(255) UNIQUE,
             password VARCHAR(1024),
+            emailVerified BOOLEAN DEFAULT false,
             date bigint
         );
 

@@ -9,6 +9,8 @@ const jwt = require("jsonwebtoken");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
 const request = require("request");
+const nodemailer = require("nodemailer");
+const querystring = require('querystring');
 
 // setting up variables
 const cwd = process.cwd();
@@ -91,6 +93,9 @@ app.get("/sellOffers", verifyAuth, getSellOffersRoute);
 app.get("/buyOrders", verifyAuth, getBuyOrdersRoute);
 
 app.get("/items", verifyAuth, getItemsRoute);
+
+app.get("/verify/email", verifyEmail);
+app.get("/resendVerificationEmail", resendVerificationEmail);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

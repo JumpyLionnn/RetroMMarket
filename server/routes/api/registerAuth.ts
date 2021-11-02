@@ -81,5 +81,6 @@ async function registerRoute(req: ExpressRequest, res: ExpressResponse){
     await addUserToDatabase(RetroMMOUsername, discordName, email, hashedPassword);
     const user = await getUserByEmail(email);
     invitationCodeUsed(invitationToken, user.id);
+    await sendEmailVerification(user.id, req.header("host"));
     res.redirect("/login");
 }

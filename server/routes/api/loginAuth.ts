@@ -26,7 +26,16 @@ async function loginRoute(req: ExpressRequest, res: ExpressResponse){
         return loginPageRoute(req, res, {errorMessage: "email or password is wrong."});
     }
 
-    const token = jwt.sign({id: user.id}, process.env.JWT_SECRET);
+    if(!user.emailverified){
+        return loginPageRoute(req, res, {alert: true, alertTitle: "Verify email adress", 
+        alertMessage: `your email is not verified. click <a id="resend-verification-email-link" href="/resendVerificationEmail?email=${user.email}">here</a> to resend you a verification email`,
+        alertOk: true
+    });
+    }
+
+    const token = jwt.sign({
+        id: user.id
+    }, process.env.JWT_SECRET);
     res.cookie("auth-token", token);
     res.redirect("/");
     

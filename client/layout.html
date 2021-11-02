@@ -39,17 +39,17 @@
         <div>Play RetroMMO <a href="https://play.retro-mmo.com/">here</a></div>
     </footer>
 </div>
-<div id="alert-container" style="display: none;">
+<div id="alert-container" {% if not alert %} style="display: none;" {% endif %}>
     <div id="alert-card">
         <div id="alert-header">
-            <h2 id="alert-title"></h2>
+            <h2 id="alert-title">{{ alertTitle }}</h2>
             <button id="alert-close-button">X</button>
         </div>
-        <div id="alert-message"></div>
-        <div id="alert-buttons">
+        <div id="alert-message">{{ alertMessage | safe }}</div>
+        <div id="alert-buttons" {% if alertOk %} style="display: none;" {% endif %}>
             <button id="yes-alert-button">Yes</button>
             <button id="no-alert-button">No</button>
         </div>
-        <button id="ok-button" style="display: none;">Ok</button>
+        <button id="ok-button" {% if not alertOk %} style="display: none;" {% endif %}>Ok</button>
     </div>
 </div>

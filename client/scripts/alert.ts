@@ -34,12 +34,12 @@ export function alert(title: string, message: string, callback: (result: boolean
     
 }
 
-function closeAlert(result: boolean): void {
-    if(currentCallback === null)
-        throw new Error("alert callback is null");
-    currentCallback(result);
+export function closeAlert(result: boolean): void {
+    if(currentCallback !== null){
+        currentCallback(result);
+        currentCallback = null;
+    }
     active = false;
-    currentCallback = null;
     alertContainer.style.display = "none";
     
 }

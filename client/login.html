@@ -1,32 +1,26 @@
-{% extends "layout.html" %}
-{% block css %}
+{% extends "layout.html" %} {% block css %}
 <link rel="stylesheet" href="style/authentication.css">
 <style>
     /* Magic to remove the sidebar to center the content */
+    
     #main-wrapper {
         grid-template-columns: 0fr 3fr;
     }
 </style>
-{% endblock %}
-{% block script %}
+{% endblock %} {% block script %}
+<script src="src/login.js" type="module" defer></script>
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
 </script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <form id="login-form" action="/login" method="POST">
     <label>Email:</label>
     <input type="text" name="email" value="" placeholder="Email" />
     <label>Password:</label>
-    <input type="password" name="password" value="" placeholder="Passsword" />
-    {% if errorMessage %}
-    <span id="error-message">{{ errorMessage }}</span>
-    {% endif %}
+    <input type="password" name="password" value="" placeholder="Passsword" /> {% if errorMessage %}
+    <span id="error-message">{{ errorMessage }}</span> {% endif %}
     <button type="submit">Login</button>
 </form>
-<a id="register-link" href="/register">Click here to create an account!</a>
-{% endblock %} 
-
+<a id="register-link" href="/register">Click here to create an account!</a> {% endblock %}
