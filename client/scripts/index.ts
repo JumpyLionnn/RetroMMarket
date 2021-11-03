@@ -8,15 +8,15 @@ let ascending: boolean = false;
 
 let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
-let upperLimit: number = 10;
+let page: number = 0;
 
 let query: string = "";
 
-window.onscroll = async function() {
-    if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
-        upperLimit += 10;
-        await updateItems();
-        if(items.length > upperLimit) upperLimit = items.length;
+window.onscroll = async () => {
+    if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        page++;
+        items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortBy, ascending, page);
+        renderItems(items);
     }
 }
 
@@ -117,8 +117,8 @@ function displayErrorMessage(message: string) {
     itemsList.appendChild(errorLabel);
 }
 
-async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: string, ascending: boolean, upperLimit: number) {
-    const url = `/find?query=${query}${category !== "" ? "&category=" + category : ""}&onlineSellersOnly=${onlineSellersOnly}&sortBy=${sortBy}&ascending=${ascending}&to=${upperLimit}`;
+async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: string, ascending: boolean, page: number) {
+    const url = `/find?query=${query}${category !== "" ? "&category=" + category : ""}&onlineSellersOnly=${onlineSellersOnly}&sortBy=${sortBy}&ascending=${ascending}&page=${page}`;
     const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -127,20 +127,19 @@ async function getSellOffers(query: string, category: string, onlineSellersOnly:
         }
     });
 
-    if(!res.ok) displayErrorMessage("No items found with the current search parameters.")
+    if(!res.ok) displayErrorMessage("No items found with the current search parameters.");
 
     return await res.json();
 }
 
 function renderItems(items: any[]) {
-    if(items === undefined || items.length === 0) {
+    if(items === undefined) {
         displayErrorMessage("No items found with the current search parameters.")
         return;
     };
 
     const fragment = document.createElement("div", { is: "item-card" });
 
-    (<HTMLDivElement>document.getElementById("items-list")).innerHTML = "";
     items?.forEach((item: any) => {
         const instance = document.importNode(fragment, true);
         (<HTMLImageElement>instance.querySelector("#item-image")).src = `assets/${getItemImage(item.item)}`;
@@ -160,7 +159,13 @@ function renderItems(items: any[]) {
 }
 
 async function updateItems(){
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortBy, ascending, upperLimit);
+    (<HTMLDivElement>document.getElementById("items-list")).innerHTML = "";
+    page = 0;
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortBy, ascending, page);
+    if(items.length === 0) {
+        displayErrorMessage("No items found with the current search parameters.")
+        return;
+    };
     renderItems(items);
 }
 
@@ -190,7 +195,6 @@ async function searchItem(searchValue: string) {
 }
 
 async function changeCategory(category:string) {
-    upperLimit = 10;
     currentCategory = category;
     updateItems();
 }

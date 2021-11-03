@@ -70,10 +70,7 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
         }
     }
 
-    if(req.query.to)
-        dbQuery += ` LIMIT ${req.query.to}`;
-    else
-        dbQuery += ` LIMIT ${pageSize}`;
+    dbQuery += ` LIMIT ${pageSize}`;
 
     const page = req.query.page;
     const isNumber = isNumeric(page);

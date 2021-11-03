@@ -14,7 +14,7 @@ const querystring = require('querystring');
 
 // setting up variables
 const cwd = process.cwd();
-const pageSize = 25;
+const pageSize = 15;
 const sellOffersLimit = 5;
 const buyOrdersLimit = 5;
 // loading data
