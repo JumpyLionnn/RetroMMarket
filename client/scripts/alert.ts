@@ -20,7 +20,7 @@ export function dialog(title: string, message: string, callback: (result: boolea
     alertContainer.style.display = "flex";
     alertButtonsContainer.style.display = "flex";
     okAlertButton.style.display = "none";
-    
+    document.body.classList.add("hide-scrollbar");
 }
 
 export function alert(title: string, message: string, callback: (result: boolean) => void){
@@ -31,7 +31,7 @@ export function alert(title: string, message: string, callback: (result: boolean
     alertContainer.style.display = "flex";
     alertButtonsContainer.style.display = "none";
     okAlertButton.style.display = "block";
-    
+    document.body.classList.add("hide-scrollbar");
 }
 
 export function closeAlert(result: boolean): void {
@@ -41,7 +41,7 @@ export function closeAlert(result: boolean): void {
     }
     active = false;
     alertContainer.style.display = "none";
-    
+    document.body.classList.remove("hide-scrollbar");
 }
 
 alertContainer.addEventListener("click", (e) => {if (e.target !== this) return; else closeAlert(false);});

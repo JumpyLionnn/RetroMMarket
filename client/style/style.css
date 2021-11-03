@@ -16,6 +16,10 @@ body {
     min-height: 100vh;
 }
 
+.hide-scrollbar {
+    overflow: hidden;
+}
+
 img {
     image-rendering: optimizeSpeed;
     image-rendering: -moz-crisp-edges;
