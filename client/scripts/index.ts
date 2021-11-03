@@ -3,11 +3,9 @@ import { dialog, alert } from "./alert.js";
 let items: any;
 let itemsExtraData: any;
 
-enum sortTypes {
-    ASC = "ASC",
-    DESC = "DESC"
-};
-let sortingOrder: sortTypes = sortTypes.ASC;
+let sortBy: string = "price";
+let ascending: boolean = false;
+
 let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
 let upperLimit: number = 10;
@@ -17,8 +15,7 @@ let query: string = "";
 window.onscroll = async function() {
     if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
         upperLimit += 10;
-        items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
-        renderItems(items);
+        await updateItems();
         if(items.length > upperLimit) upperLimit = items.length;
     }
 }
@@ -120,8 +117,8 @@ function displayErrorMessage(message: string) {
     itemsList.appendChild(errorLabel);
 }
 
-async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: sortTypes, upperLimit: number) {
-    const url = `/find?query=${query}${category !== "" ? "&category=" + category : ""}&onlineSellersOnly=${onlineSellersOnly}&sort=${sortBy}&to=${upperLimit}`;
+async function getSellOffers(query: string, category: string, onlineSellersOnly: boolean, sortBy: string, ascending: boolean, upperLimit: number) {
+    const url = `/find?query=${query}${category !== "" ? "&category=" + category : ""}&onlineSellersOnly=${onlineSellersOnly}&sortBy=${sortBy}&ascending=${ascending}&to=${upperLimit}`;
     const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -135,25 +132,11 @@ async function getSellOffers(query: string, category: string, onlineSellersOnly:
     return await res.json();
 }
 
-function compare(a: any, b: any) {
-    if(a.price < b.price) return -1;
-    if(a.price > b.price) return 1;
-    return 0;
-}
-
-function compareReverse(b: any, a: any) {
-    if(a.price < b.price) return -1;
-    if(a.price > b.price) return 1;
-    return 0;
-}
-
 function renderItems(items: any[]) {
     if(items === undefined || items.length === 0) {
         displayErrorMessage("No items found with the current search parameters.")
         return;
     };
-    if(sortingOrder === sortTypes.ASC) items.sort(compare);
-    else items.sort(compareReverse);
 
     const fragment = document.createElement("div", { is: "item-card" });
 
@@ -176,39 +159,50 @@ function renderItems(items: any[]) {
     })
 }
 
-function changeSortingOrder(selected: any) {
-    if(selected === "Low to High") {
-        sortingOrder = sortTypes.ASC;
-        renderItems(items);
-    } else if (selected === "High to Low") {
-        sortingOrder = sortTypes.DESC;
-        renderItems(items);
+async function updateItems(){
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortBy, ascending, upperLimit);
+    renderItems(items);
+}
+
+function changeSortingOrder(selected: string) {
+    if(selected === "priceASC"){
+        ascending = true;
+        sortBy = "price";
     }
+    else if(selected === "priceDESC"){
+        ascending = false;
+        sortBy = "price";
+    }
+    else if(selected === "dateASC"){
+        ascending = true;
+        sortBy = "date";
+    }
+    else if(selected === "dateDESC"){
+        ascending = false;
+        sortBy = "date";
+    }
+    updateItems();
 }
 
 async function searchItem(searchValue: string) {
     query = searchValue;
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
-    renderItems(items);
+    updateItems();
 }
 
 async function changeCategory(category:string) {
     upperLimit = 10;
     currentCategory = category;
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
-    renderItems(items);
+    updateItems();
 }
 
 async function toggleOnlineSellersOnly() {
     onlineSellersOnly = !onlineSellersOnly;
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
-    renderItems(items);
+    updateItems();
 }
 
 async function firstRender() {
     itemsExtraData = await getExtraItemData();
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
-    renderItems(items);
+    updateItems();
 }
 
 firstRender();
@@ -236,8 +230,7 @@ async function buyItem(e: HTMLButtonElement) {
         return;
     }
 
-    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortTypes.ASC, upperLimit);
-    renderItems(items);
+    updateItems();
     dialog("", "Do you want to view your orders?", (result: boolean) => {
         if(result) {
             window.location.replace("/orders");

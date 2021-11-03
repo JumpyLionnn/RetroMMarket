@@ -46,13 +46,28 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
         return res.status(400).send("onlineSellersOnly can only be true or false.");
     }
 
-    const sort = req.query.sort;
-    if(sort === "ASC" || sort === "DESC"){
-        dbQuery += ` ORDER BY price ${sort}`;
-        
+    let sortBy = req.query.sortBy;
+    if(sortBy !== "price" && sortBy !== "date" && sortBy !== undefined) {
+        return res.status(400).send("sortBy can only be price or date.");
     }
-    else if(sort !== undefined){
-        return res.status(400).send("sort can only be ASC or DESC.");
+    else if(sortBy !== undefined){
+        if(sortBy === "date"){
+            sortBy = "sellOffers.date";
+        }
+        const ascending = req.query.ascending;
+        if(ascending === "true"){
+            dbQuery += ` ORDER BY ${sortBy} ASC`;
+            
+        }
+        else if(ascending === "false"){
+            dbQuery += ` ORDER BY ${sortBy} DESC `;
+        }
+        else if(ascending !== undefined){
+            return res.status(400).send("ascending can only be true or false.");
+        }
+        else{
+            dbQuery += ` ORDER BY ${sortBy} ASC`;
+        }
     }
 
     if(req.query.to)
