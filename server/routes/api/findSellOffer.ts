@@ -6,7 +6,7 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     const query = req.query.query;
     if(typeof query === "string"){
         if(query.length < 50){
-            dbQuery += ` AND item ILIKE '%${query.trim()}%'`
+            dbQuery += ` AND item ILIKE '%$1%'`
         }
         else{
         return res.status(400).send("the query is too long.");
@@ -87,7 +87,7 @@ async function findSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
             return res.status(400).send("the page must be a positive number");
         }
     }
-    const rows = (await client.query(dbQuery)).rows;
+    const rows = (await client.query(dbQuery, [query.trim()])).rows;
     rows.forEach((row: any) =>{
         if(onlineUsers.filter((user: any) => user.id === row.sellerid).length > 0){
             row.sellerStatus = "online";
