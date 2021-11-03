@@ -12,10 +12,12 @@ let onlineSellersOnly: boolean = false;
 let currentCategory: string = "";
 let upperLimit: number = 10;
 
+let query: string = "";
+
 window.onscroll = async function() {
     if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
         upperLimit += 10;
-        items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+        items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
         renderItems(items);
         if(items.length > upperLimit) upperLimit = items.length;
     }
@@ -184,29 +186,28 @@ function changeSortingOrder(selected: any) {
     }
 }
 
-function searchItem(query: string) {
-    const filteredItems = items.filter((item: any) => {
-        return item.item.toLowerCase().includes(query); 
-    });
-    renderItems(filteredItems);
+async function searchItem(searchValue: string) {
+    query = searchValue;
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+    renderItems(items);
 }
 
 async function changeCategory(category:string) {
     upperLimit = 10;
     currentCategory = category;
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
 async function toggleOnlineSellersOnly() {
     onlineSellersOnly = !onlineSellersOnly;
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
 async function firstRender() {
     itemsExtraData = await getExtraItemData();
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortingOrder, upperLimit);
     renderItems(items);
 }
 
@@ -235,7 +236,7 @@ async function buyItem(e: HTMLButtonElement) {
         return;
     }
 
-    items = await getSellOffers("", currentCategory, onlineSellersOnly, sortTypes.ASC, upperLimit);
+    items = await getSellOffers(query, currentCategory, onlineSellersOnly, sortTypes.ASC, upperLimit);
     renderItems(items);
     dialog("", "Do you want to view your orders?", (result: boolean) => {
         if(result) {
