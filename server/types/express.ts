@@ -1,5 +1,5 @@
 declare interface ExpressResponse{
-    send: (message: string) => void;
+    send: (message: any) => void;
     sendFile: (filePath: string) => void;
     render: (filePath: string, templateVariables: any) => void;
     json: (object: {[key: string]: string | boolean | number}) => void;

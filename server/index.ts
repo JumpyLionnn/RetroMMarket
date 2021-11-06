@@ -17,6 +17,9 @@ const cwd = process.cwd();
 const pageSize = 15;
 const sellOffersLimit = 5;
 const buyOrdersLimit = 5;
+
+let requests = 0;
+
 // loading data
 const items = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/items.json")).toString());
 const categories = JSON.parse(fs.readFileSync(path.join(cwd, "server/data/categories.json")).toString());
@@ -61,7 +64,7 @@ client.on("connect", (error: Error, response: Response) => {
     createTables();
 });
 
-setInterval(cleanUpDatabase, 1000 * 60 * 60);
+setInterval(update, 1000 * 60 * 60);
 
 
 // setting up the http routes
@@ -77,33 +80,41 @@ app.get("/register", checkAuth, (req: ExpressRequest, res: ExpressResponse) => r
 app.get("/login", checkAuth, (req: ExpressRequest, res: ExpressResponse) => loginPageRoute(req, res, {}));
 
 
-app.post("/register", checkAuth, registerRoute);
-app.post("/login", checkAuth, loginRoute);
-app.get("/logout", verifyAuth, logoutRoute);
+app.post("/register", api, checkAuth, registerRoute);
+app.post("/login", api, checkAuth, loginRoute);
+app.get("/logout", api, verifyAuth, logoutRoute);
 
-app.post("/changeDiscordName", verifyAuth, changeDiscordNameRoute);
-app.post("/changeRetroMMOUsername", verifyAuth, changeRetroMMOUsernameRoute);
+app.post("/changeDiscordName", api, verifyAuth, changeDiscordNameRoute);
+app.post("/changeRetroMMOUsername", api, verifyAuth, changeRetroMMOUsernameRoute);
 
-app.post("/sell", verifyAuth, sellRoute);
-app.post("/buy", verifyAuth, buyRoute);
-app.post("/cancelOffer", verifyAuth, cancelSellOfferRoute);
-app.post("/cancelOrder", verifyAuth, cancelBuyOrderRoute);
-app.get("/find", verifyAuth, findSellOfferRoute);
-app.post("/buyOrderDelivered", verifyAuth, buyOrderDeliveredRoute);
+app.post("/sell", api, verifyAuth, sellRoute);
+app.post("/buy", api, verifyAuth, buyRoute);
+app.post("/cancelOffer", api, verifyAuth, cancelSellOfferRoute);
+app.post("/cancelOrder", api, verifyAuth, cancelBuyOrderRoute);
+app.get("/find", api, verifyAuth, findSellOfferRoute);
+app.post("/buyOrderDelivered", api, verifyAuth, buyOrderDeliveredRoute);
 
-app.get("/sellOffers", verifyAuth, getSellOffersRoute);
-app.get("/buyOrders", verifyAuth, getBuyOrdersRoute);
+app.get("/sellOffers", api, verifyAuth, getSellOffersRoute);
+app.get("/buyOrders", api, verifyAuth, getBuyOrdersRoute);
 
-app.get("/items", verifyAuth, getItemsRoute);
+app.get("/items", api, verifyAuth, getItemsRoute);
 
 app.get("/verify/email", verifyEmail);
-app.get("/resendVerificationEmail", resendVerificationEmail);
+app.get("/resendVerificationEmail", api, resendVerificationEmail);
 
 app.get("/forgotpassword", forgotPasswordPageRoute);
-app.post("/forgotpassword", forgotPasswordRoute);
+app.post("/forgotpassword", api, forgotPasswordRoute);
 
 app.get("/resetpassword", (req: ExpressRequest, res: ExpressResponse) => resetPasswordPageRoute(req, res, {}));
-app.post("/resetpassword", resetPasswordRoute);
+app.post("/resetpassword", api, resetPasswordRoute);
+
+app.get("/dashboard", verifyAuth, adminOnly, dashboardPageRoute);
+app.get("/rows", verifyAuth, adminOnly, getRowsRoute);
+app.get("/requests", verifyAuth, adminOnly, (req: ExpressRequest, res: ExpressResponse) =>  res.send({requests}));
+
+app.post("/ban", verifyAuth, adminOnly, banRoute);
+app.post("/unban", verifyAuth, adminOnly, unbanRoute);
+app.post("/delete", verifyAuth, adminOnly, deleteUserRoute);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

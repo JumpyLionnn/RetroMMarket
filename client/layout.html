@@ -13,7 +13,9 @@
         <a href="/">RetroMMarket</a>
         <div id="navbar">
             <ul>
-                {% if loggedIn %}
+                {% if loggedIn %} {% if admin %}
+                <li><a href="/dashboard">dashboard</a></li>
+                {% endif %}
                 <li><a href="/">Browse</a></li>
                 <li><a href="/sell">Sell</a></li>
                 <li><a href="/orders">Your Orders</a></li>

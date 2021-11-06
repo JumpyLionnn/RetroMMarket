@@ -1,0 +1,54 @@
+#stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#database-rows-table {
+    border-collapse: collapse;
+    font-size: 1.3em;
+}
+
+#database-rows-table,
+#database-rows-table td,
+#database-rows-table th {
+    border: 1px solid black;
+}
+
+#requests-label {
+    font-size: 1.5em;
+}
+
+#user-moderation-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+#user-moderation-panel input {
+    font-size: 1.5em;
+}
+
+#confirm-name-input {
+    margin-top: .5em;
+}
+
+#user-moderation-panel-buttons {
+    margin-top: 1em;
+}
+
+#user-moderation-panel-buttons button {
+    margin: 0 .4em;
+    font-size: 1.5em;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+@media (max-width: 650px) {
+    #stats-container {
+        gap: 2em;
+        flex-direction: column;
+    }
+}

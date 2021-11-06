@@ -14,7 +14,7 @@ let currentCallback: null | ((result: boolean) => void) = null;
 
 export function dialog(title: string, message: string, callback: (result: boolean) => void){
     alertTitle.innerText = title;
-    alertMessage.innerText = message;
+    alertMessage.innerHTML = message;
     currentCallback = callback;
     active = true;
     alertContainer.style.display = "flex";
@@ -25,7 +25,7 @@ export function dialog(title: string, message: string, callback: (result: boolea
 
 export function alert(title: string, message: string, callback: (result: boolean) => void){
     alertTitle.innerText = title;
-    alertMessage.innerText = message;
+    alertMessage.innerHTML = message;
     currentCallback = callback;
     active = true;
     alertContainer.style.display = "flex";

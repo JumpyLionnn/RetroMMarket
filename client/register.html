@@ -1,22 +1,19 @@
-{% extends "layout.html" %}
-{% block css %}
+{% extends "layout.html" %} {% block css %}
 <link rel="stylesheet" href="style/authentication.css">
 <style>
     /* Magic to remove the sidebar to center the content */
+    
     #main-wrapper {
         grid-template-columns: 0fr 3fr;
     }
 </style>
-{% endblock %}
-{% block script %}
+{% endblock %} {% block script %}
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
 </script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <form id="login-form" action="/register" method="post">
     <label>RetroMMO Username:</label>
     <input type="text" name="RetroMMOUsername" value="" placeholder="RetroMMO Username" required/>
@@ -26,9 +23,7 @@
     <input type="password" name="password" value="" placeholder="passsword" required/>
     <label>Discord (name#number)</label>
     <input type="text" name="discordName" value="" placeholder="discord#0000" required />
-    <label>Invitation Code:</label>
-    <input type="text" name="invitationToken" value="" placeholder="Invitation Code" />
     <span id="error-message">{{ errorMessage }}</span>
     <button type="submit">Register</button>
 </form>
-{% endblock %} 
+{% endblock %}

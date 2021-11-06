@@ -21,6 +21,10 @@ async function loginRoute(req: ExpressRequest, res: ExpressResponse){
         return loginPageRoute(req, res, {errorMessage: "email or password is wrong."});
     }
 
+    if(user.banned){
+        return loginPageRoute(req, res, {errorMessage: "you are banned from RetroMMarket. To get unbanned please contact jumpylionnn#9976 or cornerlord#7181"});
+    }
+
     const validPassword = await bcrypt.compare(password, user.password);
     if(!validPassword){
         return loginPageRoute(req, res, {errorMessage: "email or password is wrong."});

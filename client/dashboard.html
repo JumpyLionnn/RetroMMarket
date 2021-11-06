@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block css %}
+<style>
+    /* Magic to remove the sidebar to center the content */
+    
+    #main-wrapper {
+        grid-template-columns: 0fr 3fr;
+    }
+</style>
+<link rel="stylesheet" href="style/dashboard.css"> {% endblock %} {% block script %}
+<script src="src/dashboard.js" type="module" defer></script>
+{% endblock %} {% block content %}
+<h1>dashboard</h1>
+<div id="stats-container">
+    <table id="database-rows-table">
+        <thead>
+            <th>table</th>
+            <th>active</th>
+            <th>total</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>users</td>
+                <td id="active-users"></td>
+                <td id="users"></td>
+            </tr>
+            <tr>
+                <td>sell offers</td>
+                <td id="active-sell-offers"></td>
+                <td id="sell-offers"></td>
+            </tr>
+            <tr>
+                <td>buy orders</td>
+                <td id="active-buy-orders"></td>
+                <td id="buy-orders"></td>
+            </tr>
+            <tr>
+                <td>total rows</td>
+                <td id="active-total-rows"></td>
+                <td id="total-rows"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="user-moderation-panel">
+        <input type="text" name="name" id="name-input" placeholder="name">
+        <input type="text" name="name" id="confirm-name-input" placeholder="confirm name">
+        <div id="user-moderation-panel-buttons">
+            <button id="ban-button">ban</button>
+            <button id="unban-button">unban</button>
+            <button id="delete-button">delete</button>
+        </div>
+    </div>
+
+    <div id="requests-label">
+        <span>requests this hour: </span>
+        <span id="requests"></span>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

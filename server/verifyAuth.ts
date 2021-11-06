@@ -1,4 +1,4 @@
-function verifyAuth(req: ExpressRequest, res: ExpressResponse, next: () => void){
+async function verifyAuth(req: ExpressRequest, res: ExpressResponse, next: () => void){
     const token = req.cookies["auth-token"];
     if(process.env.NODE_ENV !== "production" && req.query.access === "true"){
         req.user = {id: 1};
@@ -13,7 +13,11 @@ function verifyAuth(req: ExpressRequest, res: ExpressResponse, next: () => void)
         if(Math.floor(Date.now() / 1000) - verified.iat > 60 * 60 * 3){ 
             throw new Error();
         }
-        req.user = verified;
+        req.user = await getUserById(verified.id);
+        if(req.user.banned){
+            res.cookie("auth-token", "");
+            res.redirect("/login");
+        }
         next();
     }
     catch(error){

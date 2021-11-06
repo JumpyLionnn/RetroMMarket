@@ -1,9 +1,9 @@
 async function profilePageRoute(req: ExpressRequest, res: ExpressResponse){
-    const user = await getUserById(req.user.id);
     res.render("profile.html", {
         loggedIn: true,
-        email: user.email,
-        RetroMMOUsername: user.retrommousername,
-        discordName: user.discordname,
+        email: req.user.email,
+        RetroMMOUsername: req.user.retrommousername,
+        discordName: req.user.discordname,
+        admin: req.user.admin
     });
 }

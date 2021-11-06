@@ -9,15 +9,9 @@ function createTables(){
             email VARCHAR(255) UNIQUE,
             password VARCHAR(1024),
             emailVerified BOOLEAN DEFAULT false,
+            admin BOOLEAN DEFAULT false,
+            banned BOOLEAN DEFAULT false,
             date bigint
-        );
-
-        /* account creation invites
-        *******************************/
-        CREATE TABLE IF NOT EXISTS invitationTokens(
-            token VARCHAR(6) UNIQUE NOT NULL,
-            used BOOLEAN DEFAULT false,
-            userId INTEGER REFERENCES users(id)
         );
 
         /* sell offers
@@ -28,7 +22,7 @@ function createTables(){
             category VARCHAR(50),
             price INTEGER,
             amount INTEGER,
-            sellerId INTEGER REFERENCES users(id),
+            sellerId INTEGER REFERENCES users(id) ON DELETE CASCADE,
             date bigint,
             done BOOLEAN DEFAULT false,
             canceled BOOLEAN DEFAULT false
@@ -38,8 +32,8 @@ function createTables(){
         **************/
         CREATE TABLE IF NOT EXISTS buyOrders(
             id SERIAL PRIMARY KEY,
-            sellOfferId INTEGER REFERENCES sellOffers(id),
-            buyerId INTEGER,
+            sellOfferId INTEGER REFERENCES sellOffers(id) ON DELETE CASCADE,
+            buyerId INTEGER REFERENCES users(id) ON DELETE CASCADE,
             amount INTEGER,
             sellerDelivered BOOLEAN DEFAULT false,
             buyerDelivered BOOLEAN DEFAULT false,

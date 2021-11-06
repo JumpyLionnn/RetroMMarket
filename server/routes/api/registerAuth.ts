@@ -46,26 +46,12 @@ async function registerRoute(req: ExpressRequest, res: ExpressResponse){
         }
     }
 
-    const invitationToken = req.body.invitationToken;
-    if(typeof invitationToken !== "string"){
-        return registerPageRoute(req, res, {errorMessage: "invitation code is not valid."});
-    }
-    else{
-        if(invitationToken.length !== 6){
-            return registerPageRoute(req, res, {errorMessage: "invitation code is not valid."});
-        }
-    }
-
     // checking for duplicates
     if(await checkUserEmail(email)){
         return registerPageRoute(req, res, {errorMessage: "email already exists."});
     }
     if(await checkUserRetroMMOUsername(RetroMMOUsername, -1)){
         return registerPageRoute(req, res, {errorMessage: "RetroMMO username already exists."});
-    }
-    // check if the invitation code is valid
-    if(!await isInvitationCodeValid(invitationToken)){
-        return registerPageRoute(req, res, {errorMessage: "invitation code is not valid."});
     }
 
     // hshing the password
@@ -79,8 +65,7 @@ async function registerRoute(req: ExpressRequest, res: ExpressResponse){
 
     // adding to database
     await addUserToDatabase(RetroMMOUsername, discordName, email, hashedPassword);
-    const user = await getUserByEmail(email);
-    invitationCodeUsed(invitationToken, user.id);
+    const user = await getUserByEmail(email);;
     await sendEmailVerification(user.id, req.header("host"));
     res.redirect("/login");
 }
