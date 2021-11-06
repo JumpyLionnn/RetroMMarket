@@ -148,7 +148,18 @@ function renderItems(items: any[]) {
         (<HTMLSpanElement>instance.querySelector("#category-name")).innerHTML = item.category;
         (<HTMLSpanElement>instance.querySelector("#seller-name")).innerHTML = item.retrommousername;
         (<HTMLSpanElement>instance.querySelector("#seller-status")).style.color = (item.sellerStatus === "online") ? "green" : "red";
-        (<HTMLInputElement>instance.querySelector("#item-count-number-input")).max = item.amount.toString();
+        const amountInput = (<HTMLInputElement>instance.querySelector("#item-count-number-input"));
+        amountInput.max = item.amount.toString();
+        amountInput.addEventListener("input", () => { 
+            const amount = parseInt(amountInput.value);
+            const max = parseInt(amountInput.max);
+            if(amount > max){
+                amountInput.value = amountInput.max;
+            }
+            else if(amount < 1){
+                amountInput.value = "1";
+            }
+        });
         (<HTMLDivElement>instance.querySelector("#price-number")).innerHTML = `${item.price.toString()}g`;
         const button = <HTMLButtonElement>instance.querySelector("#buy-button");
         button.value = item.id.toString();
@@ -211,7 +222,18 @@ async function firstRender() {
 
 firstRender();
 
-
+(document.querySelectorAll("#item-count-number-input") as NodeListOf<HTMLInputElement>).forEach((amountInput) => {
+    amountInput.addEventListener("input", () => { 
+        const amount = parseInt(amountInput.value);
+        const max = parseInt(amountInput.max);
+        if(amount > max){
+            amountInput.value = amountInput.max;
+        }
+        else if(amount < 1){
+            amountInput.value = "1";
+        }
+    });
+});
 
 async function buyItem(e: HTMLButtonElement) {
     const id = parseInt(e.value);
