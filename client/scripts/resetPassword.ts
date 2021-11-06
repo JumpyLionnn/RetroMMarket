@@ -6,7 +6,8 @@ tokenInput.value = token as string;
 
 const resetPasswordForm = document.getElementById("reset-password-form") as HTMLFormElement;
 
-const password = document.getElementById("password") as HTMLInputElement;
+const password = document.getElementById("password-input") as HTMLInputElement;
+const confirmPassword = document.getElementById("confirm-password-input") as HTMLInputElement;
 
 const errorMessage = document.getElementById("error-message") as HTMLSpanElement;
 
@@ -18,5 +19,9 @@ resetPasswordForm.addEventListener("submit", (e) => {
     else if(password.value.length > 40){
         e.preventDefault();
         errorMessage.innerText = "The password is too long.";
+    }
+    if(password.value !== confirmPassword.value){
+        e.preventDefault();
+        errorMessage.innerText = "Confirm password does not match.";
     }
 });

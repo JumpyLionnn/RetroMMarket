@@ -17,3 +17,4 @@ DELETE FROM buyOrders WHERE canceled = true;
 ALTER TABLE sellOffers DROP COLUMN canceled;
 ALTER TABLE buyOrders DROP COLUMN canceled;
 
+UPDATE users SET emailVerified = true;

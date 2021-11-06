@@ -1,8 +1,10 @@
-#login-form {
+#login-form,
+#register-form {
     width: 100%;
 }
 
 #login-form>*,
+#register-form>*,
 #forgot-password-link>*,
 #reset-password-form>* {
     margin: 0 auto;
@@ -14,12 +16,14 @@
 }
 
 #login-form>button,
+#register-form>button,
 #forgot-password-link>button,
 #reset-password-form>button {
     box-sizing: content-box;
 }
 
 #login-form>label,
+#register-form>label,
 #forgot-password-link>label,
 #reset-password-form>label {
     margin-bottom: 0;

@@ -8,21 +8,24 @@
     }
 </style>
 {% endblock %} {% block script %}
+<script src="./src/register.js" defer></script>
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
 </script>
 {% endblock %} {% block content %}
-<form id="login-form" action="/register" method="post">
+<form id="register-form" action="/register" method="post">
     <label>RetroMMO Username:</label>
     <input type="text" name="RetroMMOUsername" value="" placeholder="RetroMMO Username" required/>
+    <label>Discord (name#number)</label>
+    <input type="text" name="discordName" value="" placeholder="discord#0000" required />
     <label>Email:</label>
     <input type="text" name="email" value="" placeholder="email" required/>
     <label>Password:</label>
-    <input type="password" name="password" value="" placeholder="passsword" required/>
-    <label>Discord (name#number)</label>
-    <input type="text" name="discordName" value="" placeholder="discord#0000" required />
+    <input id="password-input" type="password" name="password" value="" placeholder="passsword" required/>
+    <label>Confirm Password:</label>
+    <input id="confirm-password-input" type="password" name="password" value="" placeholder="confirm passsword" required/>
     <span id="error-message">{{ errorMessage }}</span>
     <button type="submit">Register</button>
 </form>
