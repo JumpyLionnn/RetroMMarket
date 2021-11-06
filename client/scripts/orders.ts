@@ -37,7 +37,7 @@ async function renderOrders() {
     table.innerHTML = "";
     
     if(orders === undefined || orders.length === 0) {
-        console.log("No orders found with the current search parameters.")
+        console.log("No orders found with the current search parameters.");
     } else {
         table.innerHTML = `<tr>
             <th>Item</th>
@@ -152,7 +152,7 @@ async function cancelOrder(id: string) {
     dialog("Cancel Order", "Are you sure you want to cancel the order?", async (result: boolean) => {
         if(result) {
             const url = `/cancelOrder`;
-            console.log(id);
+            
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -162,7 +162,7 @@ async function cancelOrder(id: string) {
                     buyOrderId: parseInt(id),
                 })
             });
-            console.log(res);
+            
             if(!res.ok) throw new Error("error");
             renderOrders();
         }
@@ -182,7 +182,7 @@ async function cancelOffer(id: string) {
                     sellOfferId: parseInt(id),
                 })
             });
-            console.log(res);
+            
             if(!res.ok) throw new Error("error");
             renderOffers();
         }

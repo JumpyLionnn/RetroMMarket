@@ -10,3 +10,10 @@ ALTER TABLE buyOrders ADD FOREIGN KEY (buyerId) REFERENCES users(id) on delete c
 
 ALTER TABLE sellOffers DROP CONSTRAINT sellerid;
 ALTER TABLE sellOffers ADD FOREIGN KEY (sellerId) REFERENCES users(id) on delete cascade;
+
+DELETE FROM sellOffers WHERE canceled = true;
+DELETE FROM buyOrders WHERE canceled = true;
+
+ALTER TABLE sellOffers DROP COLUMN canceled;
+ALTER TABLE buyOrders DROP COLUMN canceled;
+
