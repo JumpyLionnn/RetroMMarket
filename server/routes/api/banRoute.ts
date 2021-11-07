@@ -10,6 +10,8 @@ async function banRoute(req: ExpressRequest, res: ExpressResponse){
     if(user.banned){
         res.status(400).send("this user is already banned");
     }
-    await client.query("UPDATE users SET banned = true WHERE id = $1", [user.id]);
+    await client.query("UPDATE users SET banned = true WHERE id = $1;", [user.id]);
+    client.query("DELETE FROM sellOffers WHERE sellerId = $1 AND done = false;", [user.id]);
+    client.query("DELETE FROM buyOrders WHERE buyerId = $1 AND done = false;", [user.id]);
     res.send("success");
 }
