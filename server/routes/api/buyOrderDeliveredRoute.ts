@@ -25,7 +25,7 @@ async function buyOrderDeliveredRoute(req: ExpressRequest, res: ExpressResponse)
     }
     if(order.sellerdelivered || order.buyerdelivered){
         client.query(`UPDATE buyOrders SET done = true WHERE id = $1;`, [orderId]);
-        if((await client.query("SELECT amount FROM sellOffers WHERE id = $1", [order.sellOfferid])).rows[0].amount === 0){
+        if((await client.query("SELECT amount FROM sellOffers WHERE id = $1", [order.sellofferid])).rows[0].amount === 0){
             const undoneBuyOrdersCount = (await client.query(`SELECT COUNT(*) FROM buyOrders WHERE done = false AND sellOfferId = $1`, [order.sellofferid])).rows[0].count;
             if(undoneBuyOrdersCount === 0){
                 client.query("UPDATE sellOffers SET done = true WHERE id = $1;", [order.sellofferid]);
