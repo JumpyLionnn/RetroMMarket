@@ -203,6 +203,7 @@ async function receiveOrder(id: string) {
                 })
             });
             if(!res.ok) throw new Error("error");
+            renderOrders();
             renderOffers();
         }
     });
