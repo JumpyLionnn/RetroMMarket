@@ -15,10 +15,16 @@
     }
 </script>
 {% endblock %} {% block content %}
+<h2>statistics</h2>
+<div id="account-stats-wrapper">
+    <div>You spent {{ goldSpent }} gold on {{ itemsBought }} items in {{ completedBuyOrders }} orders.</div>
+
+    <div>You earned {{ goldEarned }} gold on {{ itemsSold }} items in {{ completedSellOffers }} offers.</div>
+</div>
+<h2>details</h2>
 <div id="account-details-wrapper">
     <label>Email:</label>
     <div id="editable-account-detail">
-
         <input class="edit-input" type="text" name="email" value="{{ email }}" placeholder="Email" disabled/>
     </div>
 

@@ -22,6 +22,7 @@ function createTables(){
             category VARCHAR(50),
             price INTEGER,
             amount INTEGER,
+            totalAmount INTEGER,
             sellerId INTEGER REFERENCES users(id) ON DELETE CASCADE,
             date bigint,
             done BOOLEAN DEFAULT false,
