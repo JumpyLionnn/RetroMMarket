@@ -131,6 +131,8 @@ app.get("/vapidkey", verifyAuth, (req: ExpressRequest, res: ExpressResponse) => 
 app.post("/enablenotifications", verifyAuth, enableNotifications);
 app.post("/disablenotifications", verifyAuth, disableNotifications);
 
+app.get("/google25a371c5daa2ad1c.html", (req: ExpressRequest, res: ExpressResponse) => {res.sendFile(path.join(cwd, "client/google25a371c5daa2ad1c.html"))});
+
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");
 });
