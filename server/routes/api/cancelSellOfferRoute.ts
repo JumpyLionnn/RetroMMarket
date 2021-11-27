@@ -14,7 +14,7 @@ async function cancelSellOfferRoute(req: ExpressRequest, res: ExpressResponse){
     if(offer.done){
         return res.status(400).send("this offer is already done.");
     }
-    const orders = (await client.query("SELECT * FROM buyOrders WHERE sellOfferId = $1;", [offer.id])).rows;
+    const orders = (await client.query("SELECT * FROM buyOrders WHERE sellOfferId = $1 AND done = false;", [offer.id])).rows;
     for (let i = 0; i < orders.length; i++) {
         const order = orders[i];
         notify(order.buyerid, `Your buy order of ${offer.item} got canceled by ${req.user.retrommousername}.`);
