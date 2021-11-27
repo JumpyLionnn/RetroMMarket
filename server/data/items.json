@@ -179,6 +179,11 @@
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Pink_Hair_Dye"
     },
+    "Plumed Helm": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Plumed_Helm"
+    },
     "Princess Crown": {
         "image": "items/Mask.png",
         "category": "Cosmetics",
@@ -248,5 +253,10 @@
         "image": "items/Wisdom_Boost.png",
         "category": "Consumables",
         "wiki": "https://wiki.retro-mmo.com/wiki/Wisdom_Boost"
+    },
+    "Wishbone Wand": {
+        "image": "items/Wishbone_Wand.png",
+        "category": "Weapons",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Wishbone_Wand"
     }
 }
