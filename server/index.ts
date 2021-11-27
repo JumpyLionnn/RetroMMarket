@@ -16,7 +16,7 @@ const webpush = require('web-push');
 
 // setting up variables
 const cwd = process.cwd();
-const pageSize = 15;
+const pageSize = 10;
 const sellOffersLimit = 5;
 const buyOrdersLimit = 5;
 
