@@ -106,3 +106,4 @@ dist
 #build folders
 server/build/
 client/build/
+scripts/build/

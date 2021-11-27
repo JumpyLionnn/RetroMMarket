@@ -5,7 +5,9 @@
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="style/style.css">
     <title>RetroMMarket</title>
-    {% block css %}{% endblock %} {% block script %}{% endblock %}
+    {% if loggedIn %}
+    <script src="src/notifications.js" defer></script>
+    {% endif %} {% block css %}{% endblock %} {% block script %} {% endblock %}
 </head>
 
 <div id="main-wrapper">
@@ -13,7 +15,14 @@
         <a href="/">RetroMMarket</a>
         <div id="navbar">
             <ul>
-                {% if loggedIn %} {% if admin %}
+                {% if loggedIn %}
+                <li>
+                    <img src="assets/bell.png" id="bell-icon" alt="">
+                    <div id="notification-number" {% if not notifications %} hidden{% endif %}>{{ notifications }}</div>
+                    <div id="notifications-list" hidden>
+                    </div>
+                </li>
+                {% if admin %}
                 <li><a href="/dashboard">dashboard</a></li>
                 {% endif %}
                 <li><a href="/">Browse</a></li>

@@ -57,13 +57,12 @@ img {
 
 #navbar ul {
     list-style-type: none;
-    overflow: hidden;
-    padding-left: 0;
 }
 
 #navbar li {
     float: left;
     margin-left: 1em;
+    position: relative;
 }
 
 #navbar li:first-child {
@@ -73,6 +72,44 @@ img {
 #navbar li a {
     font-size: 1.5em;
     display: block;
+}
+
+#navbar li img {
+    width: 1.2em;
+    cursor: pointer;
+}
+
+#notification-number {
+    background-color: red;
+    color: white;
+    padding: .1em;
+    border-radius: 50%;
+    position: absolute;
+    top: -.3em;
+    right: -.3em;
+    width: .7em;
+    text-align: center;
+}
+
+#notifications-list {
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: .2em;
+    font-size: 1.5em;
+    width: 8em;
+    height: auto;
+    background-color: white;
+    z-index: 3;
+}
+
+#notification:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+#notification-date {
+    color: gray;
+    font-size: .7em;
 }
 
 #main-sidebar {

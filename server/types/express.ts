@@ -10,7 +10,7 @@ declare interface ExpressResponse{
 };
 
 declare interface ExpressRequest{
-    body: {[key: string]: unknown};
+    body: {[key: string]: any};
     header: (name: string) => string;
     [name: string]: any;
 }

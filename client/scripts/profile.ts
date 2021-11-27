@@ -55,3 +55,38 @@ discordNameEditButton.addEventListener("click", () =>{
     }
     
 });
+let publicVapidKey: string;
+(async () => {
+    publicVapidKey = await (await fetch("vapidkey")).text();
+})()
+const notificationsSwitch = document.getElementById("notifications-switch") as HTMLInputElement;
+
+notificationsSwitch.addEventListener("change", async () => {
+    if(notificationsSwitch.checked){
+        if(!('serviceWorker' in navigator)){
+            throw new Error("Service worker cannt be initialized");
+        }
+
+        const register = await navigator.serviceWorker.register("/src/serviceWorker.js", {
+            scope: "/src/"
+        });
+
+        const subscription = await register.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: publicVapidKey
+        });
+        
+        fetch("/enablenotifications", {
+            method: "POST",
+            body: JSON.stringify(subscription),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+    else{
+        fetch("/disablenotifications", {
+            method: "POST"
+        });
+    }
+});

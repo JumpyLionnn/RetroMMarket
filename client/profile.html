@@ -21,6 +21,16 @@
 
     <div>You earned {{ goldEarned }} gold on {{ itemsSold }} items in {{ completedSellOffers }} offers.</div>
 </div>
+<h2>settings</h2>
+<div id="account-settings-wrapper">
+    <div id="account-setting">
+        <label class="switch">
+            <input id="notifications-switch" type="checkbox" {% if notificationEnabled %}checked{% endif %}>
+            <span class="slider round"></span>
+        </label>
+        <span id="account-setting-label">notifications</span>
+    </div>
+</div>
 <h2>details</h2>
 <div id="account-details-wrapper">
     <label>Email:</label>

@@ -4,6 +4,8 @@ async function profilePageRoute(req: ExpressRequest, res: ExpressResponse){
         email: req.user.email,
         RetroMMOUsername: req.user.retrommousername,
         discordName: req.user.discordname,
-        admin: req.user.admin
+        admin: req.user.admin, 
+        notifications: await getNotificationsCount(req.user.id),
+        notificationEnabled: req.user.notifications
     }, await getUserStats(req.user.id)));
 }

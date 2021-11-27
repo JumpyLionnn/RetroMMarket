@@ -6,7 +6,8 @@
     "scripts": {
         "test": "nodemon server/build/index.js",
         "build": "cd client && tsc && cd ../server && tsc",
-        "start": "node server/build/index.js"
+        "start": "node server/build/index.js",
+        "generate-vapid-keys": "node scripts/build/generateVapidKeys.js"
     },
     "repository": {
         "type": "git",
@@ -31,7 +32,8 @@
         "nunjucks": "^3.2.3",
         "pg": "^8.7.1",
         "request": "^2.88.2",
-        "socket-io": "^1.0.0"
+        "socket-io": "^1.0.0",
+        "web-push": "^3.4.5"
     },
     "devDependencies": {
         "@types/node": "^16.10.3",

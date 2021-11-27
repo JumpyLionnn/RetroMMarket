@@ -11,6 +11,8 @@ const fs = require("fs");
 const request = require("request");
 const nodemailer = require("nodemailer");
 const querystring = require('querystring');
+const webpush = require('web-push');
+
 
 // setting up variables
 const cwd = process.cwd();
@@ -64,6 +66,13 @@ client.on("connect", (error: Error, response: Response) => {
     createTables();
 });
 
+
+webpush.setVapidDetails(
+  'mailto:RetroMMarket@gmail.com',
+  process.env.PUBLIC_VAPID_KEY,
+  process.env.PRIVATE_VAPID_KEY
+);
+
 setInterval(update, 1000 * 60 * 60);
 
 
@@ -97,6 +106,8 @@ app.post("/buyOrderDelivered", api, verifyAuth, buyOrderDeliveredRoute);
 app.get("/sellOffers", api, verifyAuth, getSellOffersRoute);
 app.get("/buyOrders", api, verifyAuth, getBuyOrdersRoute);
 
+app.get("/notifications", api, verifyAuth, getNotificationsRoute);
+
 app.get("/items", api, verifyAuth, getItemsRoute);
 
 app.get("/verify/email", verifyEmail);
@@ -115,6 +126,10 @@ app.get("/requests", verifyAuth, adminOnly, (req: ExpressRequest, res: ExpressRe
 app.post("/ban", verifyAuth, adminOnly, banRoute);
 app.post("/unban", verifyAuth, adminOnly, unbanRoute);
 app.post("/delete", verifyAuth, adminOnly, deleteUserRoute);
+
+app.get("/vapidkey", verifyAuth, (req: ExpressRequest, res: ExpressResponse) => {res.send(process.env.PUBLIC_VAPID_KEY)});
+app.post("/enablenotifications", verifyAuth, enableNotifications);
+app.post("/disablenotifications", verifyAuth, disableNotifications);
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

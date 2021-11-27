@@ -11,6 +11,10 @@ function createTables(){
             emailVerified BOOLEAN DEFAULT false,
             admin BOOLEAN DEFAULT false,
             banned BOOLEAN DEFAULT false,
+            notifications BOOLEAN DEFAULT false,
+            notificationsEndpoint TEXT DEFAULT NULL,
+            notificationsP256dh TEXT DEFAULT NULL,
+            notificationsAuth TEXT DEFAULT NULL,
             date bigint
         );
 
@@ -45,9 +49,20 @@ function createTables(){
 
         /* active reset password invitationTokens
         ******************************************/
-       CREATE TABLE IF NOT EXISTS activeResetPasswordTokens(
-           token VARCHAR(1024),
-           date bigint
-       );
+        CREATE TABLE IF NOT EXISTS activeResetPasswordTokens(
+            token VARCHAR(1024),
+            date bigint
+        );
+
+        /* notifications
+        ******************/
+        CREATE TABLE IF NOT EXISTS notifications(
+            id SERIAL PRIMARY KEY,
+            userId INTEGER REFERENCES users(id) ON DELETE CASCADE,
+            message TEXT,
+            seen BOOLEAN DEFAULT false,
+            seenDate BIGINT DEFAULT NULL,
+            date BIGINT
+        );
     `);
 }

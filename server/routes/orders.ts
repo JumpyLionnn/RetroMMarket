@@ -5,6 +5,7 @@ async function ordersPageRoute(req: ExpressRequest, res: ExpressResponse){
         orderLimit: buyOrdersLimit,
         offersAmount: await countUsersSellOffers(req.user.id),
         offerLimit: sellOffersLimit,
-        admin: req.user.admin
+        admin: req.user.admin,
+        notifications: await getNotificationsCount(req.user.id)
     });
 }

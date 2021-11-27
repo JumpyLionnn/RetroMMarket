@@ -27,7 +27,7 @@ async function buyRoute(req: ExpressRequest, res: ExpressResponse){
     if(await countUsersBuyOrders(req.user.id) >= buyOrdersLimit){
         return res.status(400).send(`you already reached the buy order limit.(${buyOrdersLimit})`);
     }
-
+    notify(sellOffer.sellerid, `${req.user.retrommousername} placed a buy order on your ${sellOffer.item} sell offer.`);
     changeSellOfferAmount(sellOfferId, sellOffer.amount - amount);
     addBuyOrder(sellOfferId, req.user.id, amount);
 
