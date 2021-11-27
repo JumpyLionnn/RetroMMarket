@@ -8,7 +8,9 @@ const activeTotalRowsTd = document.getElementById("active-total-rows") as HTMLTa
 const usersTd = document.getElementById("users") as HTMLTableCellElement;
 const sellOffersTd = document.getElementById("sell-offers") as HTMLTableCellElement;
 const buyOrdersTd = document.getElementById("buy-orders") as HTMLTableCellElement;
+const notificationsTd = document.getElementById("notifications") as HTMLTableCellElement;
 const totalRowsTd = document.getElementById("total-rows") as HTMLTableCellElement;
+
 
 const requestsSpan = document.getElementById("requests") as HTMLSpanElement;
 
@@ -29,6 +31,8 @@ async function update(){
     sellOffersTd.innerText = rows.sellOffers;
     buyOrdersTd.innerText = rows.buyOrders;
     totalRowsTd.innerText = rows.total;
+
+    notificationsTd.innerText = rows.notifications;
 
 
     const requests = await (await fetch("/requests")).json();

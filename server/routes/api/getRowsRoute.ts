@@ -9,8 +9,10 @@ async function getRowsRoute(req: ExpressRequest, res: ExpressResponse){
     result.sellOffers = await count("sellOffers");
     result.buyOrders = await count("buyOrders");
 
-    result.activeTotal = result.activeUsers + result.activeSellOffers + result.activeBuyOrders;
-    result.total = result.users + result.sellOffers + result.buyOrders;
+    result.notifications = parseInt((await client.query("SELECT COUNT(*) FROM notifications;")).rows[0].count);
+
+    result.activeTotal = result.activeUsers + result.activeSellOffers + result.activeBuyOrders + result.norifications;
+    result.total = result.users + result.sellOffers + result.buyOrders + result.norifications;
     res.send(result);
 }
 
