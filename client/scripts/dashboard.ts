@@ -34,6 +34,7 @@ async function update(){
 
     notificationsTd.innerText = rows.notifications;
 
+    console.log(rows);
 
     const requests = await (await fetch("/requests")).json();
     requestsSpan.innerText = requests.requests;
