@@ -29,11 +29,6 @@
         "category": "Consumables",
         "wiki": "https://wiki.retro-mmo.com/wiki/Black_Defense_Boost"
     },
-    "Black Dye": {
-        "image": "items/Black_Clothes_Dye.png",
-        "category": "Cosmetics",
-        "wiki": "https://wiki.retro-mmo.com/wiki/Black_Dye"
-    },
     "Black Intelligence Boost": {
         "image": "items/Black_Boost.png",
         "category": "Consumables",
@@ -58,6 +53,11 @@
         "image": "items/Blue_Candy.png",
         "category": "Consumables",
         "wiki": "https://wiki.retro-mmo.com/wiki/Blue_Candy"
+    },
+	"Blue Cane": {
+        "image": "items/Blue_Cane.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Blue_Cane"
     },
     "Bone Bracelet": {
         "image": "items/Bone_Bracelet.png",
@@ -114,6 +114,16 @@
         "category": "Weapons",
         "wiki": "https://wiki.retro-mmo.com/wiki/Dimitri%27s_Tooth"
     },
+	"Dusk Dye": {
+        "image": "items/Dusk_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Dusk_Dye"
+    },
+	"Frosty Hair Dye": {
+        "image": "items/Frosty_Hair_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Frosty_Hair_Dye"
+    },
     "Goblin Dye": {
         "image": "items/Goblin_Clothes_Dye.png",
         "category": "Cosmetics",
@@ -159,6 +169,11 @@
         "category": "Cosmetics",
         "wiki": "https://wiki.retro-mmo.com/wiki/Messy_Hair"
     },
+	"Midnight Dye": {
+        "image": "items/Black_Clothes_Dye.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Midnight_Dye"
+    },
     "Mushroom Hat": {
         "image": "items/Mask.png",
         "category": "Cosmetics",
@@ -199,6 +214,11 @@
         "category": "Consumables",
         "wiki": "https://wiki.retro-mmo.com/wiki/Red_Candy"
     },
+	"Red Cane": {
+        "image": "items/Red_Cane.png",
+        "category": "Consumables",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Red_Cane"
+    },
     "Rockstar Hair": {
         "image": "items/Mask.png",
         "category": "Cosmetics",
@@ -208,6 +228,11 @@
         "image": "items/Rusty_Dagger.png",
         "category": "Weapons",
         "wiki": "https://wiki.retro-mmo.com/wiki/Rusty_Dagger"
+    },
+	"Santa Hat": {
+        "image": "items/Mask.png",
+        "category": "Cosmetics",
+        "wiki": "https://wiki.retro-mmo.com/wiki/Santa_Hat"
     },
     "Strength Boost": {
         "image": "items/Strength_Boost.png",
