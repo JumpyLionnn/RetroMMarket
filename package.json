@@ -7,7 +7,8 @@
         "test": "nodemon server/build/index.js",
         "build": "cd client && tsc && cd ../server && tsc",
         "start": "node server/build/index.js",
-        "generate-vapid-keys": "node scripts/build/generateVapidKeys.js"
+        "generate-vapid-keys": "node scripts/build/generateVapidKeys.js",
+        "fetch-item-data": "cd scripts && tsc && cd ../ && node scripts/build/fetchItemData.js"
     },
     "repository": {
         "type": "git",
@@ -26,12 +27,12 @@
         "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.5",
+        "cross-fetch": "^3.1.5",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
         "nodemailer": "^6.7.0",
         "nunjucks": "^3.2.3",
         "pg": "^8.7.1",
-        "request": "^2.88.2",
         "socket-io": "^1.0.0",
         "web-push": "^3.4.5"
     },

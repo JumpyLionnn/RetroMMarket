@@ -8,11 +8,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
-const request = require("request");
+const request = require("cross-fetch");
 const nodemailer = require("nodemailer");
 const querystring = require('querystring');
 const webpush = require('web-push');
-
 
 // setting up variables
 const cwd = process.cwd();
