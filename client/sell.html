@@ -18,7 +18,7 @@
 <h1 id="page-title">Create Sell Offer</h1>
 <form id="sell-form" action="/sell" method="POST">
     <div id="selected-item-card">
-        <img id="selected-item-card-image" src="assets/items/unknown.png" alt="">
+        <img id="selected-item-card-image" src="assets/unknown.png" alt="">
         <h2 id="current-item-name">unknown item</h2>
         <input id="current-item-name-field" name="item" type="hidden" />
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div id="field">
         <h2 id="field-label">Price (per item):</h2>
-        <input class="field-input" type="number" name="price" value="1" min="1" max="10000000" />
+        <input id="price-input" class="field-input" type="number" name="price" value="1" min="1" max="10000000" />
     </div>
     <span id="error-message">{{ errorMessage }}</span>
     <button id="submit-sell-offer-button" type="submit">Sell</button>

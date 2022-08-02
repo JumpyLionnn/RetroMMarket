@@ -8,11 +8,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
-const request = require("request");
+const request = require("cross-fetch");
 const nodemailer = require("nodemailer");
 const querystring = require('querystring');
 const webpush = require('web-push');
-
 
 // setting up variables
 const cwd = process.cwd();
@@ -130,6 +129,9 @@ app.post("/delete", verifyAuth, adminOnly, deleteUserRoute);
 app.get("/vapidkey", verifyAuth, (req: ExpressRequest, res: ExpressResponse) => {res.send(process.env.PUBLIC_VAPID_KEY)});
 app.post("/enablenotifications", verifyAuth, enableNotifications);
 app.post("/disablenotifications", verifyAuth, disableNotifications);
+
+app.get("/google25a371c5daa2ad1c.html", (req: ExpressRequest, res: ExpressResponse) => {res.sendFile(path.join(cwd, "client/google25a371c5daa2ad1c.html"))});
+app.get("/sitemap.xml", (req: ExpressRequest, res: ExpressResponse) => {res.sendFile(path.join(cwd, "client/sitemap.xml"))});
 
 server.listen(process.env.PORT || 3000, () => {
   console.log("listening on *:3000.");

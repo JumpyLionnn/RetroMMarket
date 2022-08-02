@@ -15,6 +15,8 @@ selectedItemCard.addEventListener("click", () => {
     itemMenuElementCard.style.display = "flex";
 });
 
+const priceInput = document.getElementById("price-input") as HTMLInputElement;
+
 const selectedItemCardImage = document.getElementById("selected-item-card-image") as HTMLImageElement;
 const currentItemName = document.getElementById("current-item-name") as HTMLHeadingElement;
 
@@ -52,6 +54,8 @@ fetch("/items").then(async (res: Response) => {
             currentItem.value = itemName;
             selectedItemCardImage.src = "assets/" + items[itemName].image;
             currentItemName.innerText = itemName;
+            priceInput.value = items[itemName].minPrice;
+            priceInput.min = items[itemName].minPrice.toString();
         });
         itemList.appendChild(instance);
     })
